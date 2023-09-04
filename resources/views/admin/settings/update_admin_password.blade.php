@@ -32,14 +32,23 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Thay đổi mật khẩu</h4>
-                  @if(Session::has('error_message'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                      <strong>Lỗi: </strong> Tài khoản hoặc mật khẩu không chính xác !
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                  @endif
+                    @if(Session::has('error_message'))
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Lỗi: </strong> {{ Session::get('error_message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    @endif
+
+                    @if(Session::has('success_message'))
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Thành công: </strong> {{ Session::get('success_message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    @endif
                   <form class="forms-sample" action="{{ url('admin/update-admin-password') }}" method="post" >@csrf
                     <div class="form-group">
                       <label>Tên đăng nhập</label>

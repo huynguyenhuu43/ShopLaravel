@@ -17,13 +17,19 @@ class AdminController extends Controller
 
     public function updateAdminPassword(Request $request){
         if($request->isMethod('post')){
-            $data =$request->all();
+            $data = $request->all();
             //echo "<pre>"; print_r($data); die;
             //check if mk cu nhap boi admin chinh xac
             if(Hash::check($data['current_password'],Auth::guard('admin')->user()->password)){
-
+                //check mk moi trung voi xac nhan mk moi
+                if($data['confirm_password']==$data['new_password']){
+                    Admin::where('id',Auth::guard('admin')->user()->id)->update(['password'=>bcrypt($data['new_password'])]);
+                    return redirect()->back()->with('success_message','Đổi mật khẩu thành công !');
+                }else{
+                    return redirect()->back()->with('error_message','Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp !');
+                }
             }else{
-                return redirect()->back()->with('error_message'.'Mật khẩu cũ của bạn không chính xác !');
+                return redirect()->back()->with('error_message','Mật khẩu cũ của bạn không chính xác !');
             }
         }
         $adminDetails = Admin::where('email',Auth::guard('admin')->user()->email)->first()->toArray();
