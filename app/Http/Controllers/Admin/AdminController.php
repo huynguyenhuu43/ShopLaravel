@@ -8,6 +8,7 @@ use Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash as FacadesHash;
+use Image;
 
 class AdminController extends Controller
 {
@@ -62,9 +63,24 @@ class AdminController extends Controller
             ];
 
             $this->validate($request,$rules,$customMessages);
+            //upload admin photo
+            if($request->hasFile('admin_image')){
+                $image_tmp = $request->file('admin_image');
+                if($image_tmp->isValid()){
+                    //get image extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $imageName = rand(111,99999).'.'.$extension;
+                    $imagePath = 'admin/images/photos/'.$imageName;
+                    Image::make($image_tmp)->save($imagePath);
+                }
+            }else if(!empty($data['current_admin_image'])){
+                $imageName = $data['current_admin_image'];
+            }else{
+                $imageName = "";
+            }
 
             //update admin details
-            Admin::where('id',Auth::guard('admin')->user()->id)->update(['name'=>$data['admin_name'],'mobile'=>$data['admin_mobile']]);
+            Admin::where('id',Auth::guard('admin')->user()->id)->update(['name'=>$data['admin_name'],'mobile'=>$data['admin_mobile'],'image'=>$imageName]);
             return redirect()->back()->with('success_message','Cập nhật thông tin thành công !');
         }
         return view('admin.settings.update_admin_details');

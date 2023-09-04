@@ -60,7 +60,7 @@
                     </button>
                 </div>
                 @endif
-                  <form class="forms-sample" action="{{ url('admin/update-admin-details') }}" method="post" >@csrf
+                  <form class="forms-sample" action="{{ url('admin/update-admin-details') }}" method="post" enctype="multipart/form-data" >@csrf
                     <div class="form-group">
                       <label>Tên đăng nhập</label>
                       <input  class="form-control" value="{{ Auth::guard('admin')->user()->email }}" readonly="">
@@ -76,6 +76,14 @@
                     <div class="form-group">
                       <label for="admin_mobile">Số điện thoại</label>
                       <input type="text" class="form-control" id="admin_mobile" placeholder="Nhập số điện thoại" name="admin_mobile" value="{{ Auth::guard('admin')->user()->mobile }}" required="" maxlength="10" minlength="10">
+                    </div>
+                    <div class="form-group">
+                      <label for="admin_image">Ảnh đại diện</label>
+                      <input type="file" class="form-control" id="admin_image"  name="admin_image"   >
+                      @if(!empty(Auth::guard('admin')->user()->image))
+                      <a target="_blank" href="{{ url('admin/images/photos/'.Auth::guard('admin')->user()->image) }}">Xem hình</a>
+                      <input type="hidden" name="current_admin_image" value="{{ Auth::guard('admin')->user()->image }}">
+                      @endif
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
                     <button class="btn btn-light">Hủy</button>
