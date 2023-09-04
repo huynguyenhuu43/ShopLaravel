@@ -46,6 +46,30 @@ class AdminController extends Controller
         }
     }
 
+    public function updateAdminDetails(Request $request){
+        if($request->isMethod('post')){
+            $data = $request ->all();
+            //echo "<pre>"; print_r($data); die;
+            $rules = [
+                'admin_name'=> 'required|regex:/^[\pL\s\-]+$/u',
+                'admin_mobile' => 'required|numeric',
+            ];
+            $customMessages =[
+                'admin_name.required'=> 'Bạn phải nhập tên !',
+                'admin_name.regex'=> 'Định dạng tên không đúng !',
+                'admin_mobile.required'=> 'Bạn phải nhập số điện thoại !',
+                'admin_mobile.numeric'=> 'Định dạng số điện thoại không đúng !',
+            ];
+
+            $this->validate($request,$rules,$customMessages);
+
+            //update admin details
+            Admin::where('id',Auth::guard('admin')->user()->id)->update(['name'=>$data['admin_name'],'mobile'=>$data['admin_mobile']]);
+            return redirect()->back()->with('success_message','Cập nhật thông tin thành công !');
+        }
+        return view('admin.settings.update_admin_details');
+    }
+
     public function login(Request $request){
         //echo $password = Hash::make('123456'); die;
 
