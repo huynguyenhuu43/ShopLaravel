@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Image;
 
@@ -84,6 +85,58 @@ class AdminController extends Controller
             return redirect()->back()->with('success_message','Cập nhật thông tin thành công !');
         }
         return view('admin.settings.update_admin_details');
+    }
+
+    public function updateVendorDetails($slug,Request $request){
+        if($slug=="personal"){
+            if($request->isMethod('post')){
+                $data = $request ->all();
+                //echo "<pre>"; print_r($data); die;
+
+                $rules = [
+                    'vendor_name'=> 'required|regex:/^[\pL\s\-]+$/u',
+                    'vendor_city'=> 'required|regex:/^[\pL\s\-]+$/u',
+                    'vendor_mobile' => 'required|numeric',
+                ];
+                $customMessages =[
+                    'vendor_name.required'=> 'Bạn phải nhập tên !',
+                    'vendor_city.required'=> 'Bạn phải nhập tên thành phố !',
+                    'vendor_name.regex'=> 'Định dạng tên không đúng !',
+                    'vendor_city.regex'=> 'Định dạng không đúng !',
+                    'vendor_mobile.required'=> 'Bạn phải nhập số điện thoại !',
+                    'vendor_mobile.numeric'=> 'Định dạng số điện thoại không đúng !',
+                ];
+    
+                $this->validate($request,$rules,$customMessages);
+                //upload admin photo
+                if($request->hasFile('vendor_image')){
+                    $image_tmp = $request->file('vendor_image');
+                    if($image_tmp->isValid()){
+                        //get image extension
+                        $extension = $image_tmp->getClientOriginalExtension();
+                        $imageName = rand(111,99999).'.'.$extension;
+                        $imagePath = 'admin/images/photos/'.$imageName;
+                        Image::make($image_tmp)->save($imagePath);
+                    }
+                }else if(!empty($data['current_vendor_image'])){
+                    $imageName = $data['current_vendor_image'];
+                }else{
+                    $imageName = "";
+                }
+    
+                //update in admin table
+                Admin::where('id',Auth::guard('admin')->user()->id)->update(['name'=>$data['vendor_name'],'mobile'=>$data['vendor_mobile'],'image'=>$imageName]);
+                //update in vendor table
+                Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->update(['name'=>$data['vendor_name'],'mobile'=>$data['vendor_mobile'],'address'=>$data['vendor_address'],'city'=>$data['vendor_city'],'state'=>$data['vendor_state'],'country'=>$data['vendor_country'],'zipcode'=>$data['vendor_zipcode']]);
+                return redirect()->back()->with('success_message','Cập nhật thông tin thành công !');
+            }
+            $vendorDetails = Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+        }else if($slug=="business"){
+
+        }else if($slug=="bank"){
+
+        }
+        return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
     }
 
     public function login(Request $request){
