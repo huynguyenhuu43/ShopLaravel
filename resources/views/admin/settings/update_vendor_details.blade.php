@@ -266,7 +266,7 @@
                       <input type="text" class="form-control" id="account_number" placeholder="Nhập Số tài khoản" name="account_number" value="{{ $vendorDetails['account_number'] }}">
                     </div>
                     <div class="form-group">
-                      <label for="">Mã Code</label>
+                      <label for="bank_ifsc_code">Mã Code</label>
                       <input type="text" class="form-control" id="bank_ifsc_code" placeholder="Nhập Mã Code" name="bank_ifsc_code" value="{{ $vendorDetails['bank_ifsc_code'] }}">
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
