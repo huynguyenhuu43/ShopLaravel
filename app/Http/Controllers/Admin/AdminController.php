@@ -7,19 +7,23 @@ use Illuminate\Http\Request;
 use Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\Country;
 use App\Models\Vendor;
 use App\Models\VendorsBusinessDetail;
 use App\Models\VendorsBankDetail;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Image;
+use Session;
 
 class AdminController extends Controller
 {
     public function dashboard(){
+        Session::put('page','dashboard');
         return view('admin.dashboard');
     }
 
     public function updateAdminPassword(Request $request){
+        Session::put('page','update_admin_password');
         if($request->isMethod('post')){
             $data = $request->all();
             //echo "<pre>"; print_r($data); die;
@@ -51,6 +55,7 @@ class AdminController extends Controller
     }
 
     public function updateAdminDetails(Request $request){
+        Session::put('page','update_admin_details');
         if($request->isMethod('post')){
             $data = $request ->all();
             //echo "<pre>"; print_r($data); die;
@@ -91,6 +96,7 @@ class AdminController extends Controller
 
     public function updateVendorDetails($slug,Request $request){
         if($slug=="personal"){
+            Session::put('page','update_personal_details');
             if($request->isMethod('post')){
                 $data = $request ->all();
                 //echo "<pre>"; print_r($data); die;
@@ -134,6 +140,7 @@ class AdminController extends Controller
             }
             $vendorDetails = Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
         }else if($slug=="business"){
+            Session::put('page','update_business_details');
              if($request->isMethod('post')){
                 $data = $request ->all();
                 //echo "<pre>"; print_r($data); die;
@@ -176,6 +183,7 @@ class AdminController extends Controller
             $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
             //dd($vendorDetails);
         }else if($slug=="bank"){
+            Session::put('page','update_bank_details');
             if($request->isMethod('post')){
                 $data = $request ->all();
                 //echo "<pre>"; print_r($data); die;
@@ -203,6 +211,7 @@ class AdminController extends Controller
             }
             $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
         }
+        
         return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
     }
 
@@ -233,6 +242,42 @@ class AdminController extends Controller
         }
         return view('admin.login');
     }
+    public function admins($type=null){
+        $admins = Admin::query();
+        if(!empty($type)){
+            $admins = $admins->where('type',$type);
+            $title = ucfirst($type)."s";
+            Session::put('page','view_'.strtolower($title));
+        }else{
+            $title = "All Admins/Subadmins/Vendors";
+            Session::put('page','view_all');
+        }
+        $admins = $admins->get()->toArray();
+        //dd($admins);
+        return view('admin.admins.admins')->with(compact('admins','title'));
+    }
+
+    public function viewVendorDetails($id){
+        $vendorDetails = Admin::with('vendorPersonal','vendorBusiness','vendorBank')->where('id',$id)->first();
+        $vendorDetails = json_decode(json_encode($vendorDetails),true);
+        //dd($vendorDetails);
+        return view('admin.admins.view_vendor_details')->with(compact('vendorDetails'));
+    }
+
+    public function updateAdminStatus(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            //echo "<pre>"; print_r($data); die;
+            if($data['status']=="Active"){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            Admin::where('id',$data['admin_id'])->update(['status'=>$status]);
+            return response()->json(['status'=>$status,'admin_id'=>$data['admin_id']]);
+        }
+    }
+
     public function logout(){
         Auth::guard('admin')->logout();
         return redirect('admin/login');
