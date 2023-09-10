@@ -7,8 +7,8 @@
                 <div class="card">
                     <div class="card-body">
                         
-                        <h4 class="card-title">Phân loại</h4>
-                        <a style="max-width: 150px; float: right; display:inline-block;" href="{{ url('admin/add-edit-category') }}" class="btn btn-block btn-primary">Thêm phân loại</a>
+                        <h4 class="card-title">Sản phẩm</h4>
+                        <a style="max-width: 150px; float: right; display:inline-block;" href="{{ url('admin/add-edit-product') }}" class="btn btn-block btn-primary">Thêm sản phẩm</a>
                         @if(Session::has('success_message'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>Thành công: </strong> {{ Session::get('success_message') }}
@@ -18,65 +18,97 @@
                         </div>
                         @endif
                         <div class="table-responsive pt-3">
-                            <table id="categories" class="table table-bordered">
+                            <table id="products" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>
                                             ID
                                         </th>
+
                                         <th>
-                                            Loại
+                                            Tên sản phấm
                                         </th>
+
                                         <th>
-                                            Thuộc phân loại 
+                                            Mã sản phẩm 
                                         </th>
+
+                                        <th>
+                                            Màu sắc
+                                        </th>
+
+                                        <th>
+                                            Hình ảnh
+                                        </th>
+
+                                        <th>
+                                            Phân loại
+                                        </th>
+
                                         <th>
                                             Danh mục
                                         </th>
+
                                         <th>
-                                            URL
+                                            Thêm bởi
                                         </th>
+
                                         <th>
                                             Trạng thái
                                         </th>
+
                                         <th>
                                             Hoạt động
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($categories as $category)
-                                    @if(isset($category['parentcategory']['category_name'])&&!empty($category['parentcategory']['category_name']))
-                                       @php $parent_category = $category['parentcategory']['category_name']; @endphp
-                                    @else
-                                    @php $parent_category = "Root";@endphp
-                                    @endif
+                                    @foreach($products as $product)
+                                    
                                     <tr>
                                         <td>
-                                            {{ $category['id'] }}
+                                            {{ $product['id'] }}
                                         </td>
                                         <td>
-                                            {{ $category['category_name'] }}
+                                            {{ $product['product_name'] }}
                                         </td>
                                         <td>
-                                            {{ $parent_category }}
+                                            {{ $product['product_code'] }}
                                         </td>
                                         <td>
-                                        {{ $category['section']['name'] }}
+                                        {{ $product['product_color'] }}
                                         </td>
                                         <td>
-                                            {{ $category['url'] }}
+                                        @if(!empty($product['product_image']))
+                                            <img style="width: 100px;  height:100px;" src="{{ asset('front/images/product_images/small/'.$product['product_image']) }}">
+                                        @else
+                                        <img style="width: 100px;  height:100px;" src="{{ asset('front/images/product_images/small/no_image.png') }}">
+                                        @endif
+
                                         </td>
                                         <td>
-                                            @if($category['status']==1)
-                                            <a class="updateCategoryStatus" id="category-{{ $category['id'] }}" category_id="{{ $category['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-check" status="Active"></i></a>
+                                        {{ $product['category']['category_name'] }}
+                                        </td>
+                                        <td>
+                                        {{ $product['section']['name'] }}
+                                        </td>
+                                        <td>
+                                        @if($product['admin_type']=="vendor")
+                                        <a target="_blank" href="{{ url('admin/view-vendor-details/'.$product['admin_id']) }}">{{ ucfirst($product['admin_type']) }}</a>
+                                        @else
+                                        {{ucfirst($product['admin_type'])}}
+                                        @endif
+                                        </td>
+                                        <td>
+                                            @if($product['status']==1)
+                                            <a class="updateProductStatus" id="product-{{ $product['id'] }}" product_id="{{ $product['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-check" status="Active"></i></a>
                                             @else
-                                            <a class="updateCategoryStatus" id="category-{{ $category['id'] }}" category_id="{{ $category['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-outline" status="Inactive"></i></a>
+                                            <a class="updateProductStatus" id="product-{{ $product['id'] }}" product_id="{{ $product['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-outline" status="Inactive"></i></a>
                                             @endif 
                                         </td>
                                         <td>
-                                            <a href="{{ url('admin/add-edit-category/'.$category['id']) }}"><i style="font-size: 25px;" class="mdi mdi-pencil-box"></i></a>
-                                            <a href="javascript:void(0)" class="confirmDelete" module="category" moduleid="{{ $category['id'] }}" ><i style="font-size: 25px;" class="mdi mdi-file-excel-box"></i></a>
+                                            <a href="{{ url('admin/add-edit-product/'.$product['id']) }}"><i style="font-size: 25px;" class="mdi mdi-pencil-box"></i></a>
+                                            <a href="javascript:void(0)" class="confirmDelete" module="product" moduleid="{{ $product['id'] }}" ><i style="font-size: 25px;" class="mdi mdi-file-excel-box"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

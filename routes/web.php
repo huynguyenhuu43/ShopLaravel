@@ -60,9 +60,27 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-section-status','SectionController@updateSectionStatus');
         Route::get('delete-section/{id}','SectionController@deleteSection');
         Route::match(['get','post'],'add-edit-section/{id?}','SectionController@addEditSection');
+
+        //brands
+        Route::get('brands','BrandController@brands');
+        Route::post('update-brand-status','BrandController@updateBrandStatus');
+        Route::get('delete-brand/{id}','BrandController@deleteBrand');
+        Route::match(['get','post'],'add-edit-brand/{id?}','BrandController@addEditBrand');
         //category
         Route::get('categories','CategoryController@categories');
         Route::post('update-category-status','CategoryController@updateCategoryStatus');
+        Route::match(['get','post'],'add-edit-category/{id?}','CategoryController@addEditCategory');
+
+        Route::get('append-categories-level', 'CategoryController@appendCategoryLevel');
+        Route::get('delete-category/{id}','CategoryController@deleteCategory');
+        Route::get('delete-category-image/{id}','CategoryController@deleteCategoryImage');
+
+        //products
+        Route::get('products','ProductsController@products');
+        Route::post('update-product-status','ProductsController@updateProductStatus');
+        Route::get('delete-product/{id}','ProductsController@deleteProduct');
+        Route::match(['get','post'],'add-edit-product/{id?}','ProductsController@addEditProduct');
+
     });
 });
 
