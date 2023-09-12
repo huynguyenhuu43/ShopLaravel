@@ -103,7 +103,7 @@
                       @endif
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
-                    <button class="btn btn-light">Hủy</button>
+                    <button type="reset" class="btn btn-light">Hủy</button>
                   </form>
                 </div>
               </div>
@@ -207,7 +207,7 @@
                       @endif
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
-                    <button class="btn btn-light">Hủy</button>
+                    <button type="reset" class="btn btn-light">Hủy</button>
                   </form>
                 </div>
               </div>
@@ -270,7 +270,7 @@
                       <input type="text" class="form-control" id="bank_ifsc_code" placeholder="Nhập Mã Code" name="bank_ifsc_code" value="{{ $vendorDetails['bank_ifsc_code'] }}">
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
-                    <button class="btn btn-light">Hủy</button>
+                    <button type="reset" class="btn btn-light">Hủy</button>
                   </form>
                 </div>
               </div>

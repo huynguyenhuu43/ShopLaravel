@@ -72,7 +72,7 @@
                       <input type="password" class="form-control" id="confirm_password" placeholder="Xác nhận mật khẩu mới" name="confirm_password" required="">
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Đổi mật khẩu</button>
-                    <button class="btn btn-light">Hủy</button>
+                    <button type="reset" class="btn btn-light">Hủy</button>
                   </form>
                 </div>
               </div>

@@ -119,7 +119,7 @@
                       <input type="text" class="form-control" id="meta_keywords"  name="meta_keywords" @if(!empty($category['meta_keywords'])) value="{{ $category['meta_keywords'] }}" @else value="{{ old('meta_keywords') }}" @endif>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
-                    <button class="btn btn-light">Hủy</button>
+                    <button type="reset" class="btn btn-light">Hủy</button>
                   </form>
                 </div>
               </div>

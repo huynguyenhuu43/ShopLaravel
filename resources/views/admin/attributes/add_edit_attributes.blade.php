@@ -86,7 +86,7 @@
                      @if(!empty($product['product_image']))
                      <img style="width: 100px;" src="{{ url('front/images/product_images/large/' . $product['product_image']) }}">
                      @else
-                     <img style="width: 100px;" src="{{ url('front/images/product_images/small/no_image.png">
+                     <img style="width: 100px;" src="{{ url('front/images/product_images/small/no_image.png') }}">
                      @endif
                     </div>
 
@@ -103,13 +103,11 @@
                     </div>
                     
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
-                    <button class="btn btn-light">Hủy</button>
+                    <button type="reset" class="btn btn-light">Hủy</button>
                   </form>
-                </div>
-              </div>
-            </div>
-            <div class="table-responsive pt-3">
-                            <table id="products" class="table table-bordered">
+                  <br><br><h4 class="card-title">Thuộc tính sản phẩm</h4>
+                  <form method="post" action="{{url('admin/edit-attributes/'.$product['id']) }}">@csrf
+                  <table id="products" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>
@@ -131,18 +129,17 @@
                                         <th>
                                             Thuế
                                         </th>
-                                        <th>
-                                            Trạng thái
-                                        </th>
 
                                         <th>
                                             Hoạt động
                                         </th>
+
+                                         
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach($product['attributes'] as $attribute)
-                                    
+                                    @foreach($product['attributes'] as $attribute)
+                                    <input style="display: none;" type="text" name="attributeId[]" value="{{ $attribute['id'] }}" >
                                     <tr>
                                         <td>
                                             {{ $attribute['id'] }}
@@ -157,28 +154,33 @@
                                         </td>
 
                                         <td>
-                                            {{ $attribute['price'] }}
+                                            <input type="number" name="price[]" value="{{ $attribute['price'] }}" required="" style="width: 70px;">
                                         </td>
 
                                         <td>
-                                            {{ $attribute['stock'] }}
+                                           
+                                            <input type="number" name="stock[]" value="{{ $attribute['stock'] }}" required="" style="width: 70px;">
                                         </td>
-                                        
                                         <td>
                                             @if($attribute['status']==1)
-                                            <a class="updateProductStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-check" status="Active"></i></a>
+                                            <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-check" status="Active"></i></a>
                                             @else
-                                            <a class="updateProductStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-outline" status="Inactive"></i></a>
+                                            <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}" attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)"><i style="font-size: 25px;" class="mdi mdi-bookmark-outline" status="Inactive"></i></a>
                                             @endif 
-                                        </td>
-                                        
+                                        </td> 
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+                           
+                
           </div>
-        </div>
     </div>
     <!-- content-wrapper ends -->
     <!-- partial:partials/_footer.html -->

@@ -26,9 +26,9 @@
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
+              <!-- <div class="brand-logo">
                 <img src="{{ url('admin/images/logo.svg') }}" alt="logo">
-              </div>
+              </div> -->
               <h4>Chào mừng đến với trang quản trị.</h4>
               <h6 class="font-weight-light">Đăng nhập để tiếp tục.</h6>
               @if(Session::has('error_message'))
@@ -67,23 +67,17 @@
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium 
                   auth-form-btn">ĐĂNG NHẬP</button>
                 </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
+                <!-- <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input">
                       Nhớ tài khoản
                     </label>
                   </div>
-                  <a href="#" class="auth-link text-black">Quên mật khẩu ?</a>
-                </div>
-                <div class="mb-2">
-                  <button type="button" class="btn btn-block btn-facebook auth-form-btn">
-                    <i class="ti-facebook mr-2"></i>Đăng nhập với facebook
-                  </button>
-                </div>
-                <div class="text-center mt-4 font-weight-light">
-                  Bạn chưa có tài khoản ? <a href="register.html" class="text-primary">Tạo tài khoản</a>
-                </div>
+                  
+                </div> -->
+                
+                
               </form>
             </div>
           </div>
