@@ -77,7 +77,9 @@
                         @endforeach
                       </select>
                     </div>
-
+                    <div class="loadFilters">
+                      @include('admin.filters.category_filters')
+                    </div>
                     <div class="form-group">
                       <label for="brand_id">Chọn thương hiệu</label>
                       <select name="brand_id" id="brand_id" class="form-control" style="color:darkcyan">
@@ -159,6 +161,10 @@
                     <div class="form-group">
                       <label for="is_featured">Mặt hàng nổi bật</label>
                       <input type="checkbox" name="is_featured" id="is_featured" value="Yes" @if(!empty($product['is_featured']) && $product['is_featured']=="Yes") checked="" @endif>
+                    </div>
+                    <div class="form-group">
+                      <label for="is_bestseller">Bán chạy nhất</label>
+                      <input type="checkbox" name="is_bestseller" id="is_bestseller" value="Yes" @if(!empty($product['is_bestseller']) && $product['is_bestseller']=="Yes") checked="" @endif>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
                     <button type="reset" class="btn btn-light">Hủy</button>

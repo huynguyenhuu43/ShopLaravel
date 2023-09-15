@@ -69,7 +69,7 @@ class CategoryController extends Controller
 
                
 
-             //upload admin photo
+             //upload category photo
              if($request->hasFile('category_image')){
                 $image_tmp = $request->file('category_image');
                 if($image_tmp->isValid()){

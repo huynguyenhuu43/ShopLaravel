@@ -4,6 +4,8 @@ $(document).ready(function(){
     $('#categories').DataTable();
     $('#brands').DataTable();
     $('#products').DataTable();
+    $('#banners').DataTable();
+    $('#filters').DataTable();
    $(".nav-item").removeClass("active");
    $(".nav-link").removeClass("active");
     //check admin password is correct or not correct
@@ -46,6 +48,31 @@ $(document).ready(function(){
                     $("#admin-"+admin_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
                 }else if(resp['status']==1){
                     $("#admin-"+admin_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    });
+
+    //update banner status
+    $(document).on("click",".updateBannerStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var banner_id =$(this).attr("banner_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type: 'post',
+            url: '/admin/update-banner-status',
+            data: { status:status,banner_id: banner_id },
+            success: function (resp) {
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#banner-"+banner_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#banner-"+banner_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
                 }
             },
             error: function () {
@@ -154,6 +181,56 @@ $(document).ready(function(){
         });
     });
 
+    //update filter status
+    $(document).on("click",".updateFilterStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var filter_id =$(this).attr("filter_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type: 'post',
+            url: '/admin/update-filter-status',
+            data: { status:status,filter_id:filter_id },
+            success: function (resp) {
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#filter-"+filter_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#filter-"+filter_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    });
+
+    //update filter-values status
+    $(document).on("click",".updateFilterValueStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var filter_id =$(this).attr("filter_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type: 'post',
+            url: '/admin/update-filter-value-status',
+            data: { status:status,filter_id:filter_id },
+            success: function (resp) {
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#filter-"+filter_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#filter-"+filter_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    });
+
     //update attribute status
     $(document).on("click",".updateAttributeStatus",function(){
         var status = $(this).children("i").attr("status");
@@ -205,7 +282,7 @@ $(document).ready(function(){
     });
    
     //confirm delete
-    $(".confirmDelete").click(function(){
+    $(document).on("click",".confirmDelete",function(){
         var module =$(this).attr('module');
         var moduleid =$(this).attr('moduleid');
         Swal.fire({
@@ -268,5 +345,21 @@ $(document).ready(function(){
         e.preventDefault();
         $(this).parent('div').remove(); //Remove field html
         x--; //Decrease field counter
+    });
+
+    //show filter on selection
+    $("#category_id").on('change',function(){
+        var category_id =$(this).val();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type:'post',
+            url:'category-filters',
+            data:{category_id:category_id},
+            success:function(resp){
+                $(".loadFilters").html(resp.view);
+            }
+        });
     });
 });

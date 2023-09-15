@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,18 +90,39 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('delete-attribute/{id}','ProductsController@deleteAttribute');
 
         Route::match(['get','post'],'edit-attributes/{id}','ProductsController@editAttributes');
+
+        //filter
+        Route::get('filters','FilterController@filters');
+        Route::get('filters-values','FilterController@filtersValues');
+        Route::post('update-filter-status','FilterController@updateFilterStatus');
+        Route::post('update-filter-value-status','FilterController@updateFilterValueStatus');
+        Route::match(['get','post'],'add-edit-filter/{id?}','FilterController@addEditFilter');
+        Route::match(['get','post'],'add-edit-filter-value/{id?}','FilterController@addEditFilterValue');
+        Route::post('category-filters','FilterController@categoryFilters');
         
         // Images
         Route::match(['get','post'],'add-images/{id}','ProductsController@addImages');
         Route::post('update-image-status','ProductsController@updateImageStatus');
         Route::get('delete-image/{id}','ProductsController@deleteImage');
 
-
+        //banner
+        Route::get('banners','BannersController@banners');
+        Route::post('update-banner-status','BannersController@updateBannerStatus');
+        Route::get('delete-banner/{id?}','BannersController@deleteBanner');
+        Route::match(['get','post'],'add-edit-banner/{id?}','BannersController@addEditBanner');
 
     });
 });
 
 Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::get('/','IndexController@index');
+
+    //listing
+    $catUrls = Category::select('url')->where('status',1)->get()->pluck('url')->toArray();
+    //dd($catUrls);
+    foreach ($catUrls as $key =>$url){
+        Route::match(['get','post'],'/'.$url,'ProductsController@listing');
+    }
 });
+
 

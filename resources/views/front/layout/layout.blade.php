@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Nguyễn Hữu Huy</title>
@@ -113,5 +114,9 @@ ga('send', 'pageview')
 <script type="text/javascript" src="{{ url('front/js/owl.carousel.min.js') }}"></script>
 <!-- Main -->
 <script type="text/javascript" src="{{ url('front/js/app.js') }}"></script>
+<!-- custom -->
+<script type="text/javascript" src="{{ url('front/js/custom.js') }}"></script>
+
+@include('front.layout.scripts')
 </body>
 </html>

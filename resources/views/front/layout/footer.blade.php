@@ -76,19 +76,19 @@
                             <ul>
                                 <li>
                                     <i class="fas fa-location-arrow u-s-m-r-9"></i>
-                                    <span>Stack Developers Youtube Channel</span>
+                                    <span> Youtube Channel</span>
                                 </li>
                                 <li>
                                     <a href="tel:+111-222-333">
                                         <i class="fas fa-phone u-s-m-r-9"></i>
-                                        <span>+111-222-333</span>
+                                        <span>+84 398730223</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="mailto:info@sitemakers.in">
                                         <i class="fas fa-envelope u-s-m-r-9"></i>
                                         <span>
-                                            info@sitemakers.in</span>
+                                            huynguyenhuu43@gmail.com</span>
                                     </a>
                                 </li>
                             </ul>
@@ -139,7 +139,7 @@
                     </ul>
                 </div>
                 <p class="copyright-text">Copyright &copy; 2022
-                    <a target="_blank" rel="nofollow" href="https://youtube.com/stackdevelopers">Stack Developers</a> | All Right Reserved</p>
+                    <a target="_blank" rel="nofollow" href="https://youtube.com">Nguyễn Hữu Huy</a> | All Right Reserved</p>
             </div>
         </div>
         <!-- Bottom-Footer /- -->

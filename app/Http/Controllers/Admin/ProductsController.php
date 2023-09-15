@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
+use App\Models\ProductsFilter;
 use Auth;
 use Session;
 use Image;
@@ -118,13 +119,24 @@ class ProductsController extends Controller
             // Insert Video name in products table
             $product->product_video= $videoName;
             }
-            }
+         }
 
              //luu
                 $categoryDetails = Category::find($data['category_id']);
                 $product->section_id =$categoryDetails['section_id'];
                 $product->category_id =$data['category_id'];
                 $product->brand_id =$data['brand_id'];
+
+                $productFilters = ProductsFilter::productFilters();
+                foreach($productFilters as $filter){
+                    //echo $data[$filter['filter_column']]; die;
+                    $filterAvailable =ProductsFilter::filterAvailable($filter['id'],$data['category_id']);
+                    if($filterAvailable=="Yes"){
+                        if(isset($filter['filter_column']) && $data[$filter['filter_column']]){
+                            $product->{$filter['filter_column']}= $data[$filter['filter_column']];
+                        }
+                    }
+                }
 
                 $adminType = Auth::guard('admin')->user()->type;
                 $vendor_id = Auth::guard('admin')->user()->vendor_id;
@@ -136,6 +148,13 @@ class ProductsController extends Controller
                     $product->vendor_id = $vendor_id;
                 }else{
                     $product->vendor_id = 0;
+                }
+
+                if(empty($data['product_discount'])){
+                    $data['product_discount'] =0 ;
+                }
+                if(empty($data['product_weight'])){
+                    $data['product_weight'] =0 ;
                 }
 
                 $product->product_name = $data['product_name'];
@@ -152,6 +171,11 @@ class ProductsController extends Controller
                     $product->is_featured =$data['is_featured'];
                 }else{
                     $product->is_featured ="No";
+                }
+                if(!empty($data['is_bestseller'])){
+                    $product->is_bestseller =$data['is_bestseller'];
+                }else{
+                    $product->is_bestseller ="No";
                 }
                 $product->status = 1;
                 $product->save();

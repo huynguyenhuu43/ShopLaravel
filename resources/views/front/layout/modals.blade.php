@@ -20,6 +20,7 @@
         </div>
     </div>
     <!-- Responsive-Search /- -->
+    <?php /*
     <!-- Newsletter-Modal -->
     <div id="newsletter-modal" class="modal fade">
         <div class="modal-dialog modal-dialog-centered">
@@ -29,15 +30,15 @@
                     <div class="row align-items-center u-s-m-x-0">
                         <div class="col-lg-6 col-md-6 col-sm-12 u-s-p-x-0">
                             <div class="newsletter-image">
-                                <a target="_blank" rel="nofollow" href="https://youtube.com/stackdevelopers" class="banner-hover effect-dark-opacity">
-                                    <img class="img-fluid" src="{{ asset('front/images/banners/stack-developers-modal-popup.png')}}" alt="Newsletter Image">
+                                <a target="_blank" rel="nofollow" href="https://youtube.com" class="banner-hover effect-dark-opacity">
+                                    <img class="img-fluid" src="{{ asset('front/images/banners/ou.png')}}" alt="Newsletter Image">
                                 </a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="newsletter-wrapper">
                                 <h1>New to
-                                    <span>Stack Developers</span> ?
+                                    <span>Nguyễn Hữu Huy</span> ?
                                     <br>Subscribe to our Newsletter</h1>
                                 <h5>Get latest product update...</h5>
                                 <form>
@@ -56,7 +57,7 @@
             </div>
         </div>
     </div>
-    <!-- Newsletter-Modal /- -->
+    <!-- Newsletter-Modal /- --> */ ?>
     <!-- Quick-view-Modal -->
     <div id="quick-view" class="modal fade">
         <div class="modal-dialog modal-dialog-centered">
