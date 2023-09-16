@@ -192,7 +192,7 @@ class AdminController extends Controller
                     'bank_name'=> 'required|regex:/^[\pL\s\-]+$/u',
                     'account_holder_name'=> 'required|regex:/^[\pL\s\-]+$/u',
                     'account_number' => 'required|numeric',
-                    'bank_ifcs_code'=>'required|numeric',
+                    //'bank_ifcs_code'=>'required|numeric',
                 ];
                 $customMessages =[
                     'bank_name.required'=> 'Bạn phải nhập tên ngân hàng !',
@@ -201,7 +201,7 @@ class AdminController extends Controller
                     'account_holder_name.regex'=> 'Định dạng không đúng !',
                     'account_number.required'=> 'Bạn phải nhập số tài khoản !',
                     'account_number.numeric'=> 'Định dạng số tài khoản không đúng !',
-                    'bank_ifcs_code.required'=> 'Bạn phải nhập mã code !',
+                    //'bank_ifcs_code.required'=> 'Bạn phải nhập mã code !',
                 ];
     
                 $this->validate($request,$rules,$customMessages);

@@ -73,6 +73,8 @@
                 
                 @if(!empty(Auth::guard('admin')->user()->image))
                       <img src="{{ url('admin/images/photos/'.Auth::guard('admin')->user()->image) }}" alt="profile">
+                    @else
+                    <img src="{{ url('admin/images/photos/No-Image.png') }}" alt="profile">
                       @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

@@ -54,6 +54,28 @@ class ProductsController extends Controller
                     $categoryProducts->whereIn('products.id',$productIds);
                 }
 
+                //check for color
+                if(isset($data['color']) && !empty($data['color'])){
+                    $productIds = Product::select('id')->whereIn('product_color',$data['color'])->pluck('id')->toArray();
+                    $categoryProducts->whereIn('products.id',$productIds);
+                }
+
+                //check for price
+                if(isset($data['price']) && !empty($data['price'])){
+                    foreach ($data['price'] as $key =>$price){
+                        $priceArr = explode("-",$price);
+                        $productIds[]= Product::select('id')->whereBetween('product_price',[$priceArr[0],$priceArr[1]])->pluck('id')->toArray();
+                    }
+                    $productIds = call_user_func_array('array_merge',$productIds);
+                    $categoryProducts->whereIn('products.id',$productIds);
+                }
+
+                //check for brand
+                if(isset($data['brand']) && !empty($data['brand'])){
+                    $productIds = Product::select('id')->whereIn('brand_id',$data['brand'])->pluck('id')->toArray();
+                    $categoryProducts->whereIn('products.id',$productIds);
+                }
+
                 $categoryProducts= $categoryProducts->paginate(15);
                 //dd($categoryDetails);
                 // echo "Category exists"; die;

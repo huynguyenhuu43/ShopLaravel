@@ -123,6 +123,12 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     foreach ($catUrls as $key =>$url){
         Route::match(['get','post'],'/'.$url,'ProductsController@listing');
     }
+
+    // Vendor Login/Register
+    Route::get('vendor/login-register','VendorController@loginRegister');
+    // Vendor Register
+    Route::post('vendor/register','VendorController@vendorRegister');
+    
 });
 
 
