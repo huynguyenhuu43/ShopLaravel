@@ -120,6 +120,11 @@
                       <label for="product_weight">Trọng lượng</label>
                       <input type="text" class="form-control" id="product_weight" placeholder="Nhập trọng lượng" name="product_weight" @if(!empty($product['product_weight'])) value="{{ $product['product_weight'] }}" @else value="{{ old('product_weight') }}" @endif>
                     </div>
+
+                    <div class="form-group">
+                      <label for="group_code">Nhóm màu</label>
+                      <input type="text" class="form-control" id="group_code" placeholder="Nhập mã nhóm" name="group_code" @if(!empty($product['group_code'])) value="{{ $product['group_code'] }}" @else value="{{ old('group_code') }}" @endif>
+                    </div>
                     
 
                     <div class="form-group">

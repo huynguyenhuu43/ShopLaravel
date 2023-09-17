@@ -176,11 +176,25 @@ class AdminController extends Controller
                 }else{
                     $imageName = "";
                 }
+
+                $vendorCount =VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->count();
+                if($vendorCount>0){
+                    VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['shop_name'=>$data['shop_name'],'shop_mobile'=>$data['shop_mobile'],'shop_address'=>$data['shop_address'],'shop_city'=>$data['shop_city'],'shop_state'=>$data['shop_state'],'shop_country'=>$data['shop_country'],'shop_zipcode'=>$data['shop_zipcode'],'business_license_number'=>$data['business_license_number'],'gst_number'=>$data['gst_number'],'pan-number'=>$data['pan-number'],'address_proof'=>$data['address_proof'],'address_proof_image'=>$imageName]);
+
+                }else{
+                    VendorsBusinessDetail::insert(['vendor_id'=>Auth::guard('admin')->user()->vendor_id,'shop_name'=>$data['shop_name'],'shop_mobile'=>$data['shop_mobile'],'shop_address'=>$data['shop_address'],'shop_city'=>$data['shop_city'],'shop_state'=>$data['shop_state'],'shop_country'=>$data['shop_country'],'shop_zipcode'=>$data['shop_zipcode'],'business_license_number'=>$data['business_license_number'],'gst_number'=>$data['gst_number'],'pan-number'=>$data['pan-number'],'address_proof'=>$data['address_proof'],'address_proof_image'=>$imageName]);
+
+                }
                     //update in vendor table
-                VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['shop_name'=>$data['shop_name'],'shop_mobile'=>$data['shop_mobile'],'shop_address'=>$data['shop_address'],'shop_city'=>$data['shop_city'],'shop_state'=>$data['shop_state'],'shop_country'=>$data['shop_country'],'shop_zipcode'=>$data['shop_zipcode'],'business_license_number'=>$data['business_license_number'],'gst_number'=>$data['gst_number'],'pan-number'=>$data['pan-number'],'address_proof'=>$data['address_proof'],'address_proof_image'=>$imageName]);
                 return redirect()->back()->with('success_message','Cập nhật thông tin thành công !');
             }
-            $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            $vendorCount = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->count();
+            if($vendorCount>0){
+                $vendorDetails = VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            }else{
+                $vendorDetails =array();
+            }
+           
             //dd($vendorDetails);
         }else if($slug=="bank"){
             Session::put('page','update_bank_details');
@@ -205,11 +219,25 @@ class AdminController extends Controller
                 ];
     
                 $this->validate($request,$rules,$customMessages);
+                $vendorCount =VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->count();
+                if($vendorCount>0){
+                    VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['account_holder_name'=>$data['account_holder_name'],'bank_name'=>$data['bank_name'],'account_number'=>$data['account_number'],'bank_ifsc_code'=>$data['bank_ifsc_code']]);
+
+                }else{
+                    VendorsBankDetail::insert(['vendor_id'=>Auth::guard('admin')->user()->vendor_id,'account_holder_name'=>$data['account_holder_name'],'bank_name'=>$data['bank_name'],'account_number'=>$data['account_number'],'bank_ifsc_code'=>$data['bank_ifsc_code']]);
+
+                }
                     //update in vendor table
-                VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(['account_holder_name'=>$data['account_holder_name'],'bank_name'=>$data['bank_name'],'account_number'=>$data['account_number'],'bank_ifsc_code'=>$data['bank_ifsc_code']]);
                 return redirect()->back()->with('success_message','Cập nhật thông tin thành công !');
             }
-            $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            
+
+            $vendorCount = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->count();
+            if($vendorCount>0){
+                $vendorDetails = VendorsBankDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+            }else{
+                $vendorDetails =array();
+            }
         }
         
         return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));

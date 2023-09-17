@@ -151,51 +151,51 @@
                     </div>
                     <div class="form-group">
                       <label for="shop_name">Tên Shop</label>
-                      <input type="text" class="form-control" id="shop_name" placeholder="Nhập tên shop của bạn" name="shop_name" value="{{ $vendorDetails['shop_name'] }}">
+                      <input type="text" class="form-control" id="shop_name" placeholder="Nhập tên shop của bạn" name="shop_name" @if(isset($vendorDetails['shop_name'])) value="{{ $vendorDetails['shop_name'] }}" @endif>
                     </div>
                     <div class="form-group">
                       <label for="shop_address">Địa chỉ Shop</label>
-                      <input type="text" class="form-control" id="shop_address" placeholder="Nhập địa chỉ shop của bạn" name="shop_address" value="{{ $vendorDetails['shop_address'] }}">
+                      <input type="text" class="form-control" id="shop_address" placeholder="Nhập địa chỉ shop của bạn" name="shop_address" @if(isset($vendorDetails['shop_address'])) value="{{ $vendorDetails['shop_address'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="shop_city">Tỉnh/Thành phố</label>
-                      <input type="text" class="form-control" id="shop_city" placeholder="Nhập tỉnh hoặc thành phố" name="shop_city" value="{{ $vendorDetails['shop_city'] }}">
+                      <input type="text" class="form-control" id="shop_city" placeholder="Nhập tỉnh hoặc thành phố" name="shop_city" @if(isset($vendorDetails['shop_city'])) value="{{ $vendorDetails['shop_city'] }}"@endif>
                     </div>
                     <div class="form-website
                       <label for="shop_state">Quận/huyện</label>
-                      <input type="text" class="form-control" id="shop_state" placeholder="Nhập quận/huyện của bạn" name="shop_state" value="{{ $vendorDetails['shop_state'] }}">
+                      <input type="text" class="form-control" id="shop_state" placeholder="Nhập quận/huyện của bạn" name="shop_state" @if(isset($vendorDetails['shop_state'])) value="{{ $vendorDetails['shop_state'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="shop_country">Quốc gia</label>
-                      <input type="text" class="form-control" id="shop_country" placeholder="Nhập quốc gia của bạn" name="shop_country" value="{{ $vendorDetails['shop_country'] }}">
+                      <input type="text" class="form-control" id="shop_country" placeholder="Nhập quốc gia của bạn" name="shop_country"@if(isset($vendorDetails['shop_country'])) value="{{ $vendorDetails['shop_country'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="shop_zipcode">Mã Zip</label>
-                      <input type="text" class="form-control" id="shop_zipcode" placeholder="Nhập mã vùng" name="shop_zipcode" value="{{ $vendorDetails['shop_zipcode'] }}">
+                      <input type="text" class="form-control" id="shop_zipcode" placeholder="Nhập mã vùng" name="shop_zipcode"@if(isset($vendorDetails['shop_zipcode'])) value="{{ $vendorDetails['shop_zipcode'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="shop_mobile">Số điện thoại</label>
-                      <input type="text" class="form-control" id="shop_mobile" placeholder="Nhập số điện thoại" name="shop_mobile" value=" {{ $vendorDetails['shop_mobile'] }} " required="" maxlength="10" minlength="10">
+                      <input type="text" class="form-control" id="shop_mobile" placeholder="Nhập số điện thoại" name="shop_mobile"@if(isset($vendorDetails['shop_mobile'])) value=" {{ $vendorDetails['shop_mobile'] }} " @endif required="" maxlength="10" minlength="10">
                     </div>
                     <div class="form-group">
                       <label for="business_license_number">Số giấy phép kinh doanh</label>
-                      <input type="text" class="form-control" id="business_license_number" placeholder="Nhập số giấy phép kinh doanh" name="business_license_number" value="{{ $vendorDetails['business_license_number'] }}">
+                      <input type="text" class="form-control" id="business_license_number" placeholder="Nhập số giấy phép kinh doanh" name="business_license_number"@if(isset($vendorDetails['business_license_number'])) value="{{ $vendorDetails['business_license_number'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="gst_number">GTS</label>
-                      <input type="text" class="form-control" id="gst_number" placeholder="Nhập GTS" name="gst_number" value="{{ $vendorDetails['gst_number'] }}">
+                      <input type="text" class="form-control" id="gst_number" placeholder="Nhập GTS" name="gst_number"@if(isset($vendorDetails['gst_number'])) value="{{ $vendorDetails['gst_number'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="pan-number">PAN</label>
-                      <input type="text" class="form-control" id="pan-number" placeholder="Nhập PAN" name="pan-number" value="{{ $vendorDetails['pan-number'] }}">
+                      <input type="text" class="form-control" id="pan-number" placeholder="Nhập PAN" name="pan-number"@if(isset($vendorDetails['pan-number'])) value="{{ $vendorDetails['pan-number'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="address_proof">Giấy tờ chứng minh</label>
                       <select class="form-control" name="address_proof" id="address_proof">
-                        <option value="CCCD" @if($vendorDetails['address_proof']=="CCCD") selected @endif>Căn cước công dân</option>
-                        <option value="SHK" @if($vendorDetails['address_proof']=="SHK") selected @endif>Sổ hộ khẩu</option>
-                        <option value="HC" @if($vendorDetails['address_proof']=="HC") selected @endif>Hộ chiếu</option>
-                        <option value="GPLX" @if($vendorDetails['address_proof']=="GPLX") selected @endif>Giấy phép lái xe</option>
+                        <option value="CCCD" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=="CCCD") selected @endif>Căn cước công dân</option>
+                        <option value="SHK" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=="SHK") selected @endif>Sổ hộ khẩu</option>
+                        <option value="HC" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=="HC") selected @endif>Hộ chiếu</option>
+                        <option value="GPLX" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=="GPLX") selected @endif>Giấy phép lái xe</option>
                       </select>
                     </div>
                     <div class="form-group">
@@ -255,19 +255,19 @@
                     </div>
                     <div class="form-group">
                       <label for="account_holder_name">Tên tài khoản</label>
-                      <input type="text" class="form-control" id="account_holder_name" placeholder="Nhập Tên tài khoản" name="account_holder_name" value="{{ $vendorDetails['account_holder_name'] }}">
+                      <input type="text" class="form-control" id="account_holder_name" placeholder="Nhập Tên tài khoản" name="account_holder_name" @if(isset($vendorDetails['account_holder_name'])) value="{{ $vendorDetails['account_holder_name'] }}" @endif>
                     </div>
                     <div class="form-group">
                       <label for="bank_name">Tên ngân hàng</label>
-                      <input type="text" class="form-control" id="bank_name" placeholder="Nhập Tên ngân hàng" name="bank_name" value="{{ $vendorDetails['bank_name'] }}">
+                      <input type="text" class="form-control" id="bank_name" placeholder="Nhập Tên ngân hàng" name="bank_name"@if(isset($vendorDetails['bank_name'])) value="{{ $vendorDetails['bank_name'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="account_number">Số tài khoản</label>
-                      <input type="text" class="form-control" id="account_number" placeholder="Nhập Số tài khoản" name="account_number" value="{{ $vendorDetails['account_number'] }}">
+                      <input type="text" class="form-control" id="account_number" placeholder="Nhập Số tài khoản" name="account_number"@if(isset($vendorDetails['account_number'])) value="{{ $vendorDetails['account_number'] }}"@endif>
                     </div>
                     <div class="form-group">
                       <label for="bank_ifsc_code">Mã Code</label>
-                      <input type="text" class="form-control" id="bank_ifsc_code" placeholder="Nhập Mã Code" name="bank_ifsc_code" value="{{ $vendorDetails['bank_ifsc_code'] }}">
+                      <input type="text" class="form-control" id="bank_ifsc_code" placeholder="Nhập Mã Code" name="bank_ifsc_code"@if(isset($vendorDetails['bank_ifsc_code'])) value="{{ $vendorDetails['bank_ifsc_code'] }}"@endif>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Xác nhận</button>
                     <button type="reset" class="btn btn-light">Hủy</button>

@@ -68,7 +68,7 @@ class VendorController extends Controller
             $admin->mobile= $data['mobile'];
             $admin->email= $data['email'];
             $admin->password= bcrypt($data['password']);
-            $admin->status= 1;
+            $admin->status= 1;//chỗ này nếu muốn tạo tk xong phải chờ admin click vào trangj thái thì mới login dược thì là 0
 
             //set time zone
             date_default_timezone_set("Asia/Ho_Chi_Minh"); // Đặt múi giờ mặc địn

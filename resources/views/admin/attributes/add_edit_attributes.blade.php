@@ -127,7 +127,7 @@
                                         </th>
 
                                         <th>
-                                            Thuế
+                                            Số lượng
                                         </th>
 
                                         <th>
