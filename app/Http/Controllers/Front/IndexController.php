@@ -16,6 +16,9 @@ class IndexController extends Controller
         $bestSeller =Product::where(['is_bestseller'=>'Yes','status'=>1])->inRandomOrder()->get()->toArray();
         $discountedProducts = Product::where('product_discount','>',0)->where('status',1)->limit(6)->inRandomOrder()->get()->toArray();
         $featuredProducts = Product::where(['is_featured'=>'Yes','status'=>1])->limit(6)->get()->toArray();
-        return view('front.index')->with(compact('sliderBanners','fixBanners','newProducts','bestSeller','discountedProducts','featuredProducts'));
+        $meta_title ="Trang web thiết bị di động đa nhà cung cấp";
+        $meta_description ="Mua sắm online các thiết bị như Điện thoại, Laptop, Máy tính bảng";
+        $meta_keywords ="website điện tử, mua sắm online,đa nhà cung cấp ";
+        return view('front.index')->with(compact('sliderBanners','fixBanners','newProducts','bestSeller','discountedProducts','featuredProducts','meta_title','meta_description','meta_keywords'));
     }
 }

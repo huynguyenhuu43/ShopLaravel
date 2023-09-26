@@ -43,13 +43,13 @@
                             <h6>COLLECTION</h6>
                             <ul>
                                 <li>
-                                    <a href="cart.html">Men Clothing</a>
+                                    <a href="{{ url('men') }}">Men Clothing</a>
                                 </li>
                                 <li>
-                                    <a href="checkout.html">Women Clothing</a>
+                                    <a href="{{ url('women') }}">Women Clothing</a>
                                 </li>
                                 <li>
-                                    <a href="account.html">Kids Clothing</a>
+                                    <a href="{{ url('kids') }}">Kids Clothing</a>
                                 </li>
                             </ul>
                         </div>
@@ -59,13 +59,13 @@
                             <h6>ACCOUNT</h6>
                             <ul>
                                 <li>
-                                    <a href="shop-v1-root-category.html">My Account</a>
+                                    <a href="{{ url('/user/account') }}">My Account</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="shop-v1-root-category.html">My Profile</a>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <a href="listing.html">My Orders</a>
+                                    <a href="{{ url('/user/orders') }}">My Orders</a>
                                 </li>
                             </ul>
                         </div>

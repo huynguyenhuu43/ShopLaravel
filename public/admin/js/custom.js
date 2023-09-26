@@ -6,6 +6,11 @@ $(document).ready(function(){
     $('#products').DataTable();
     $('#banners').DataTable();
     $('#filters').DataTable();
+    $('#coupons').DataTable();
+    $('#users').DataTable();
+    $('#pages').DataTable();
+    $('#orders').DataTable();
+
    $(".nav-item").removeClass("active");
    $(".nav-link").removeClass("active");
     //check admin password is correct or not correct
@@ -156,6 +161,31 @@ $(document).ready(function(){
         });
     });
 
+    //update user status
+    $(document).on("click",".updateUserStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var user_id =$(this).attr("user_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type: 'post',
+            url: '/admin/update-user-status',
+            data: { status:status,user_id:user_id },
+            success: function (resp) {
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#user-"+user_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#user-"+user_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    });
+
     //update Product status
     $(document).on("click",".updateProductStatus",function(){
         var status = $(this).children("i").attr("status");
@@ -173,6 +203,31 @@ $(document).ready(function(){
                     $("#product-"+product_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
                 }else if(resp['status']==1){
                     $("#product-"+product_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    });
+
+    //update Coupon status
+    $(document).on("click",".updateCouponStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var coupon_id =$(this).attr("coupon_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type: 'post',
+            url: '/admin/update-coupon-status',
+            data: { status:status,coupon_id:coupon_id },
+            success: function (resp) {
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#coupon-"+coupon_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#coupon-"+coupon_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
                 }
             },
             error: function () {
@@ -362,4 +417,29 @@ $(document).ready(function(){
             }
         });
     });
+
+    //show hide coupon feild
+    $("#ManualCoupon").click(function(){
+        $("#couponField").show();
+    });
+    $("#AutomaticCoupon").click(function(){
+        $("#couponField").hide();
+    });
+
+    //show dvvc va mvd
+    $("#courier_name").hide();
+    $("#tracking_number").hide();
+    $("#order_status").on("change",function(){
+        if(this.value=="Shipped"){
+            $("#courier_name").show();
+            $("#tracking_number").show();
+        }else{
+            $("#courier_name").hide();
+            $("#tracking_number").hide();
+        }
+    });
+
+    
+
+    
 });

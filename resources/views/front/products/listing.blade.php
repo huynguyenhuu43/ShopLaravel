@@ -39,34 +39,36 @@
                 <div class="col-lg-9 col-md-9 col-sm-12">
                     <!-- Page-Bar -->
                     <div class="page-bar clearfix">
-                        <div class="shop-settings">
+                        <!-- <div class="shop-settings">
                             <a id="list-anchor" >
                                 <i class="fas fa-th-list"></i>
                             </a>
                             <a id="grid-anchor" class="active">
                                 <i class="fas fa-th"></i>
                             </a>
-                        </div>
+                        </div> -->
+                        @if(!isset($_REQUEST['search']))
                         <!-- Toolbar Sorter 1  -->
                         <form name="sortProducts" id="sortProducts">
                             <input type="hidden" name="url" id="url" value="{{ $url }}">
-                        <div class="toolbar-sorter">
-                            <div class="select-box-wrapper">
-                                <label class="sr-only" for="sort-by">Sort By</label>
-                                <select name="sort" id="sort" class="select-box" >
-                                    <!-- <option selected="selected" value="">Sort By: Best Selling</option> -->
-                                    <option selected="" value="">Select</option>
-                                    <option value="product_latest" @if(isset($_GET['sort']) && $_GET['sort']=="product_latest") selected="" @endif>Sort By: Latest</option>
-                                    <option value="price_lowest" @if(isset($_GET['sort']) && $_GET['sort']=="price_lowest") selected="" @endif>Sort By: Lowest Price</option>
-                                    <option value="price_highest" @if(isset($_GET['sort']) && $_GET['sort']=="price_highest") selected="" @endif>Sort By: Highest Price</option>
-                                    <option value="name_a_z" @if(isset($_GET['sort']) && $_GET['sort']=="name_a_z") selected="" @endif>Sort By: Name A - Z</option>
-                                    <option value="name_z_a" @if(isset($_GET['sort']) && $_GET['sort']=="name_z_a") selected="" @endif>Sort By: Name Z - A</option>
-                                    <!-- <option value="">Sort By: Best Rating</option> -->
-                                </select>
+                            <div class="toolbar-sorter">
+                                <div class="select-box-wrapper">
+                                    <label class="sr-only" for="sort-by">Sort By</label>
+                                    <select name="sort" id="sort" class="select-box" >
+                                        <!-- <option selected="selected" value="">Sort By: Best Selling</option> -->
+                                        <option selected="" value="">Select</option>
+                                        <option value="product_latest" @if(isset($_GET['sort']) && $_GET['sort']=="product_latest") selected="" @endif>Sort By: Latest</option>
+                                        <option value="price_lowest" @if(isset($_GET['sort']) && $_GET['sort']=="price_lowest") selected="" @endif>Sort By: Lowest Price</option>
+                                        <option value="price_highest" @if(isset($_GET['sort']) && $_GET['sort']=="price_highest") selected="" @endif>Sort By: Highest Price</option>
+                                        <option value="name_a_z" @if(isset($_GET['sort']) && $_GET['sort']=="name_a_z") selected="" @endif>Sort By: Name A - Z</option>
+                                        <option value="name_z_a" @if(isset($_GET['sort']) && $_GET['sort']=="name_z_a") selected="" @endif>Sort By: Name Z - A</option>
+                                        <!-- <option value="">Sort By: Best Rating</option> -->
+                                    </select>
+                                </div>
                             </div>
-                        </div>
                         </form>
                         <!-- //end Toolbar Sorter 1  -->
+                        @endif
                         <!-- Toolbar Sorter 2  -->
                         <!-- <div class="toolbar-sorter-2">
                             <div class="select-box-wrapper">
@@ -95,11 +97,13 @@
                     <div class="filter_products">
                         @include('front.products.ajax_products_listing')
                     </div>
-                    <!-- Row-of-Product-Container /- -->
-                    @if(isset($_GET['sort']))
-                    <div>{{ $categoryProducts->appends(['sort'=>$_GET['sort']])->links() }}</div>
-                    @else
-                    <div>{{ $categoryProducts->links() }}</div>
+                    @if(!isset($_REQUEST['search']))
+                        <!-- Row-of-Product-Container /- -->
+                        @if(isset($_GET['sort']))
+                        <div>{{ $categoryProducts->appends(['sort'=>$_GET['sort']])->links() }}</div>
+                        @else
+                        <div>{{ $categoryProducts->links() }}</div>
+                        @endif
                     @endif
                     <div>&nbsp;</div>
                     <div>{{ $categoryDetails['categoryDetails']['description'] }}</div>

@@ -10,7 +10,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Nguyễn Hữu Huy</title>
+    <title>
+        @if(!empty($meta_title))
+        {{$meta_title}}
+        @else
+        Shop bán điện thoại đa nhà cung cấp của Nguyễn Hữu Huy
+        @endif
+    </title>
+    @if(!empty($meta_description))
+    <meta name="description" content="{{ $meta_description}}">
+    @endif
+    @if(!empty($meta_keywords))
+    <meta name="keywords" content="{{ $meta_keywords}}">
+    @endif
     <!-- Standard Favicon -->
     <link href="favicon.ico" rel="shortcut icon">
     <!-- Base Google Font for Web-app -->
@@ -33,9 +45,15 @@
     <link rel="stylesheet" href="{{ url('front/css/utility.css') }}">
     <!-- Main -->
     <link rel="stylesheet" href="{{ url('front/css/bundle.css') }}">
+    <!-- Load -->
+    <link rel="stylesheet" href="{{ url('front/css/custom.css') }}">
 </head>
 
 <body>
+
+<div class="loader">
+   <img src="{{ asset('front/images/loaders/Spin-1s-200px.gif') }}" alt="loading..." />
+</div>
 
 <!-- app -->
 <div id="app">

@@ -1,6 +1,7 @@
 <?php
 use App\Models\Section;
 $sections = Section::sections();
+$totalCartItems =totalCartItems();
 ?>
 <!-- Header -->
 <header>
@@ -25,35 +26,53 @@ $sections = Section::sections();
                 <nav>
                     <ul class="secondary-nav g-nav">
                         <li>
-                            <a>Tài khoản của tôi
+                            <a>@if(Auth::check()) Tài khoản của tôi @else Đăng nhập/Đăng kí @endif
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
                             <ul class="g-dropdown" style="width:200px">
                                 <li>
-                                    <a href="cart.html">
+                                    <a href="{{ url('/cart') }}">
                                         <i class="fas fa-cog u-s-m-r-9"></i>
                                         Giỏ hàng</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="wishlist.html">
                                         <i class="far fa-heart u-s-m-r-9"></i>
                                         Danh sách yêu thích</a>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <a href="checkout.html">
+                                    <a href="{{ url('/checkout') }}">
                                         <i class="far fa-check-circle u-s-m-r-9"></i>
                                         Thanh toán</a>
                                 </li>
+                                @if(Auth::check())
                                 <li>
-                                    <a href="account.html">
+                                    <a href="{{ url('/user/account') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Tài khoản của tôi</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/user/orders') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Đơn hàng của tôi</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('/user/logout') }}">
+                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        Đăng xuất</a>
+                                </li>
+                                @else
+                                <li>
+                                    <a href="{{ url('/user/login-register') }}">
                                         <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
                                         Khánh hàng đăng nhập</a>
                                 </li>
                                 <li>
-                                    <a href="account.html">
+                                    <a href="{{ url('/vendor/login-register') }}">
                                         <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
                                         Nhà cung cấp đăng nhập</a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
                         <li>
@@ -98,18 +117,18 @@ $sections = Section::sections();
                         </div>
                     </div>
                     <div class="col-lg-6 u-d-none-lg">
-                        <form class="form-searchbox">
+                        <form class="form-searchbox" action="{{ url('search-products') }}" method="get">
                             <label class="sr-only" for="search-landscape">Tìm kiếm</label>
-                            <input id="search-landscape" type="text" class="text-field" placeholder="Search everything">
+                            <input name="search" id="search-landscape" type="text" class="text-field" placeholder="Search everything" @if(isset($_REQUEST['search']) && !empty($_REQUEST['search'])) value="{{$_REQUEST['search']}}" @endif>
                             <div class="select-box-position">
                                 <div class="select-box-wrapper select-hide">
                                     <label class="sr-only" for="select-category">Chọn danh mục để tìm kiếm</label>
-                                    <select class="select-box" id="select-category">
+                                    <select class="select-box" id="select-category" name="section_id">
                                         <option selected="selected" value="">
                                             Tất cả
                                         </option>
                                         @foreach($sections as $section)
-                                        <option value="">{{ $section['name'] }}</option>
+                                        <option @if(isset($_REQUEST['section_id']) && !empty($_REQUEST['section_id']) && $_REQUEST['section_id']==$section['id']) selected="" @endif value="{{ $section['id'] }}" >{{ $section['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -121,20 +140,20 @@ $sections = Section::sections();
                         <nav>
                             <ul class="mid-nav g-nav">
                                 <li class="u-d-none-lg">
-                                    <a href="index.html">
+                                    <a href="{{url('/')}}">
                                         <i class="ion ion-md-home u-c-brand"></i>
                                     </a>
                                 </li>
-                                <li class="u-d-none-lg">
+                                <!-- <li class="u-d-none-lg">
                                     <a href="wishlist.html">
                                         <i class="far fa-heart"></i>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a id="mini-cart-trigger">
                                         <i class="ion ion-md-basket"></i>
-                                        <span class="item-counter">4</span>
-                                        <span class="item-price">$220.00</span>
+                                        <span class="item-counter totalCartItems">{{ $totalCartItems }}</span>
+                                        <!-- <span class="item-price">$220.00</span> -->
                                     </a>
                                 </li>
                             </ul>
@@ -149,64 +168,17 @@ $sections = Section::sections();
             <div class="fixed-responsive-wrapper">
                 <button type="button" class="button fas fa-search" id="responsive-search"></button>
             </div>
-            <div class="fixed-responsive-wrapper">
+            <!-- <div class="fixed-responsive-wrapper">
                 <a href="wishlist.html">
                     <i class="far fa-heart"></i>
                     <span class="fixed-item-counter">4</span>
                 </a>
-            </div>
+            </div> -->
         </div>
         <!-- Responsive-Buttons /- -->
         <!-- Mini Cart -->
-        <div class="mini-cart-wrapper">
-            <div class="mini-cart">
-                <div class="mini-cart-header">
-                    YOUR CART
-                    <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
-                </div>
-                <ul class="mini-cart-list">
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                    <li class="clearfix">
-                        <a href="single-product.html">
-                            <img src="{{ asset('front/images/product/product@1x.jpg') }}" alt="Product">
-                            <span class="mini-item-name">Product name</span>
-                            <span class="mini-item-price">$100.00</span>
-                            <span class="mini-item-quantity"> x 1 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="mini-shop-total clearfix">
-                    <span class="mini-total-heading float-left">Total:</span>
-                    <span class="mini-total-price float-right">$400.00</span>
-                </div>
-                <div class="mini-action-anchors">
-                    <a href="cart.html" class="cart-anchor">View Cart</a>
-                    <a href="checkout.html" class="checkout-anchor">Checkout</a>
-                </div>
-            </div>
+        <div id="appendHeaderCartItems">
+        @include('front.layout.header_cart_items')
         </div>
         <!-- Mini Cart /- -->
         <!-- Bottom-Header -->
@@ -258,12 +230,12 @@ $sections = Section::sections();
                                         @endforeach
                                      
                                         
-                                        <li>
+                                        <!-- <li>
                                             <a class="v-more">
                                                 <i class="ion ion-md-add"></i>
                                                 <span>View More</span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </nav>
@@ -298,7 +270,7 @@ $sections = Section::sections();
                                     <ul>
                                         <li class="menu-title">COMPANY</li>
                                         <li>
-                                            <a href="about.html" class="u-c-brand">About Us</a>
+                                            <a href="#" class="u-c-brand">About Us</a>
                                         </li>
                                         <li>
                                             <a href="contact.html">Contact Us</a>
@@ -310,25 +282,25 @@ $sections = Section::sections();
                                     <ul>
                                         <li class="menu-title">COLLECTION</li>
                                         <li>
-                                            <a href="cart.html">Men Clothing</a>
+                                            <a href="{{url('men')}}">Men Clothing</a>
                                         </li>
                                         <li>
-                                            <a href="checkout.html">Women Clothing</a>
+                                            <a href="{{url('women')}}">Women Clothing</a>
                                         </li>
                                         <li>
-                                            <a href="account.html">Kids Clothing</a>
+                                            <a href="{{url('Mobiles')}}">Kids Clothing</a>
                                         </li>
                                     </ul>
                                     <ul>
                                         <li class="menu-title">ACCOUNT</li>
                                         <li>
-                                            <a href="shop-v1-root-category.html">My Account</a>
+                                            <a href="{{ url('/user/account') }}">My Account</a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="shop-v1-root-category.html">My Profile</a>
-                                        </li>
+                                        </li> -->
                                         <li>
-                                            <a href="listing.html">My Orders</a>
+                                            <a href="{{ url('/user/orders') }}">My Orders</a>
                                         </li>
                                         
                                     </ul>

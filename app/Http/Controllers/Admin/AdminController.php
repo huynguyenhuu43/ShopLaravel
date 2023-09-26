@@ -8,6 +8,13 @@ use Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use App\Models\Country;
+use App\Models\Section;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Coupon;
+use App\Models\Brand;
+use App\Models\User;
 use App\Models\Vendor;
 use App\Models\VendorsBusinessDetail;
 use App\Models\VendorsBankDetail;
@@ -19,7 +26,15 @@ class AdminController extends Controller
 {
     public function dashboard(){
         Session::put('page','dashboard');
-        return view('admin.dashboard');
+        $sectionsCount = Section::count();
+        $categoriesCount = Category::count();
+        $productsCount = Product::count();
+        $ordersCount = Order::count();
+        $couponsCount = Coupon::count();
+        $brandsCount = Brand::count();
+        $usersCount = User::count();
+        $vendorsCount = Vendor::count();
+        return view('admin.dashboard')->with(compact('sectionsCount','categoriesCount','productsCount','ordersCount','couponsCount','brandsCount','usersCount','vendorsCount'));
     }
 
     public function updateAdminPassword(Request $request){
@@ -302,6 +317,10 @@ class AdminController extends Controller
                 $status = 1;
             }
             Admin::where('id',$data['admin_id'])->update(['status'=>$status]);
+            //moi them 2 dong tu code (bật/tắt trạng thái của bảng vendors)
+            $adminDetails = Admin::where('id',$data['admin_id'])->first()->toArray();
+            Vendor::where('id',$adminDetails['vendor_id'])->update(['status'=>$status]);
+
             return response()->json(['status'=>$status,'admin_id'=>$data['admin_id']]);
         }
     }
