@@ -127,6 +127,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('orders/{id}','OrderController@orderDetails');
         Route::post('update-order-status','OrderController@updateOrderStatus');
         Route::post('update-order-item-status','OrderController@updateOrderItemStatus');
+        // Ratings
+        Route::get('ratings','RatingController@ratings');
+        Route::post('update-rating-status','RatingController@updateRatingStatus');
+        Route::get('delete-rating/{id}','RatingController@deleteRating');
+        
 
         // Order Invoices
         Route::get('orders/invoice/{id}','OrderController@viewOrderInvoice');
@@ -173,6 +178,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function(){
     Route::post('user/register','UserController@userRegister');
     // Search Products
     Route::get('search-products','ProductsController@listing');
+    // Add Rating/Review
+    Route::post('/add-rating','RatingController@addRating');
     //infor
     Route::get('infor/aboutus','InfoController@aboutus');
     

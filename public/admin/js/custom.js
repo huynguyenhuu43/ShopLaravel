@@ -10,6 +10,7 @@ $(document).ready(function(){
     $('#users').DataTable();
     $('#pages').DataTable();
     $('#orders').DataTable();
+    $('#ratings').DataTable();
 
    $(".nav-item").removeClass("active");
    $(".nav-link").removeClass("active");
@@ -153,6 +154,31 @@ $(document).ready(function(){
                     $("#brand-"+brand_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
                 }else if(resp['status']==1){
                     $("#brand-"+brand_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    });
+
+    //update rating status
+    $(document).on("click",".updateRatingStatus",function(){
+        var status = $(this).children("i").attr("status");
+        var rating_id =$(this).attr("rating_id");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+            type: 'post',
+            url: '/admin/update-rating-status',
+            data: { status:status,rating_id:rating_id },
+            success: function (resp) {
+                //alert(resp);
+                if(resp['status']==0){
+                    $("#rating-"+rating_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-outline' status='Inactive'></i>");
+                }else if(resp['status']==1){
+                    $("#rating-"+rating_id).html("<i style='font-size: 25px;' class='mdi mdi-bookmark-check' status='Active'></i>");
                 }
             },
             error: function () {

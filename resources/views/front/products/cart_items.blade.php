@@ -5,11 +5,11 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Subtotal</th>
-                                        <th>Action</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Tổng cộng</th>
+                                        <th>Trạng thái</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,13 +86,13 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Cart Totals</th>
+                                        <th colspan="2">Chi tiết thanh toán</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <h3 class="calc-h3 u-s-m-b-0">Sub Total</h3>
+                                            <h3 class="calc-h3 u-s-m-b-0">Tổng giá thành</h3>
                                         </td>
                                         <td>
                                             <span class="calc-text">{{ number_format($total_price, 0, ',', '.') }} ₫</span>
@@ -100,7 +100,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h3 class="calc-h3 u-s-m-b-0">Coupon Discount</h3>
+                                            <h3 class="calc-h3 u-s-m-b-0">Giảm giá</h3>
                                         </td>
                                         <td>
                                         <span class="calc-text couponAmount">
@@ -116,7 +116,7 @@
                                    
                                     <tr>
                                         <td>
-                                            <h3 class="calc-h3 u-s-m-b-0">Grand Total</h3>
+                                            <h3 class="calc-h3 u-s-m-b-0">Tổng cộng</h3>
                                         </td>
                                         <td>
                                         <span class="calc-text grand_total">

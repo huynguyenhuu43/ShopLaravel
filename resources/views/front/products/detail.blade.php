@@ -5,18 +5,59 @@ $productFilters = ProductsFilter::productFilters();
 ?>
 @extends('front.layout.layout')
 @section('content')
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+    .rate:not(:checked) > input {
+        position:inherit;
+        top:-9999px;
+    }
+    .rate:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:30px;
+        color:#ccc;
+    }
+    .rate:not(:checked) > label:before {
+        content: '★ ';
+    }
+    .rate > input:checked ~ label {
+        color: #ffc700;    
+    }
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+        color: #deb217;  
+    }
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+    }
+</style>
 <!-- Page Introduction Wrapper -->
 <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Detail</h2>
+                <h2>Chi tiết</h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="{{url('/')}}">Home</a>
+                        <a href="{{url('/')}}">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="javascript:;">Detail</a>
+                        <a href="javascript:;">Chi tiết</a>
                     </li>
                 </ul>
             </div>
@@ -73,7 +114,7 @@ $productFilters = ProductsFilter::productFilters();
                             </div>
                             <ul class="bread-crumb">
                                 <li class="has-separator">
-                                    <a href="{{url('/')}}">Home</a>
+                                    <a href="{{url('/')}}">Trang chủ</a>
                                 </li>
                                 <li class="has-separator">
                                     <a href="javascript:;">{{$productDetails['section']['name']}}</a>
@@ -81,14 +122,21 @@ $productFilters = ProductsFilter::productFilters();
                                 <?php echo $categoryDetails['breadcrumbs'] ?>
                             </ul>
                             <div class="product-rating">
-                                <div class='star' title="4.5 out of 5 - based on 23 Reviews">
-                                    <span style='width:67px'></span>
+                                <div  title="{{$avgRating}} trên 5 - trên tổng số {{count($ratings)}} lượt đánh giá">
+                                @if($avgStarRating>0)
+                                    <?php
+                                    $star=1;
+                                    while($star<=$avgStarRating){
+                                    ?>
+                                    <span style="color: gold;font-size: 24px; ">&#9733;</span>
+                                    <?php $star++; } ?>({{$avgRating}})
+                                    @endif
                                 </div>
-                                <span>(23)</span>
+                                <span></span>
                             </div>
                         </div>
                         <div class="section-2-short-description u-s-p-y-14">
-                            <h6 class="information-heading u-s-m-b-8">Description:</h6>
+                            <h6 class="information-heading u-s-m-b-8">Mô tả:</h6>
                             <p>{{$productDetails['description']}}
                             </p>
                         </div>
@@ -119,27 +167,27 @@ $productFilters = ProductsFilter::productFilters();
                             </div>
                         </div> -->
                         <div class="section-4-sku-information u-s-p-y-14">
-                            <h6 class="information-heading u-s-m-b-8">Sku Information:</h6>
+                            <h6 class="information-heading u-s-m-b-8">Thông tin chi tiết:</h6>
                             <div class="availability">
-                                <span>Product Code:</span>
+                                <span>Mã sản phẩm:</span>
                                 <span>{{$productDetails['product_code']}}</span>
                             </div>
                             <div class="left">
-                                <span>Product Color:</span>
+                                <span>Màu sắc:</span>
                                 <span>{{$productDetails['product_color']}}</span>
                             </div>
                             <div class="availability">
-                                <span>Availability:</span>
+                                <span>Trạng thái:</span>
                                 @if($totalStock>0)
-                                <span>In Stock</span>
+                                <span>Còn hàng</span>
                                 @else
-                                <span style="color: red;">Out of Stock</span>
+                                <span style="color: red;">Hết hàng</span>
                                 @endif
                             </div>
                             @if($totalStock>0)
                             <div class="left">
-                                <span>Only:</span>
-                                <span>{{$totalStock}} left</span>
+                                <span>Chỉ còn:</span>
+                                <span>{{$totalStock}} sản phẩm</span>
                             </div>
                             @endif
                         </div>
@@ -208,13 +256,13 @@ $productFilters = ProductsFilter::productFilters();
                                         </ul>
                                     </div> */ ?>
                                     <div class="quantity-wrapper u-s-m-b-22">
-                                        <span>Quantity:</span>
+                                        <span>Số lượng:</span>
                                         <div class="quantity">
                                             <input type="number" class="quantity-text-field" name="quantity" value="1">
                                         </div>
                                     </div>
                                     <div>
-                                        <button class="button button-outline-secondary" type="submit">Add to cart</button>
+                                        <button class="button button-outline-secondary" type="submit">Thêm vào giỏ hàng</button>
                                         <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                         <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                     </div>
@@ -226,8 +274,8 @@ $productFilters = ProductsFilter::productFilters();
             </div>
             <!-- Product-Detail /- -->
             <!-- Detail-Tabs -->
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row" >
+                <div class="col-lg-12 col-md-12 col-sm-12" >
                     <div class="detail-tabs-wrapper u-s-p-t-80">
                         <div class="detail-nav-wrapper u-s-m-b-30">
                             <ul class="nav single-product-nav justify-content-center">
@@ -238,7 +286,7 @@ $productFilters = ProductsFilter::productFilters();
                                     <a class="nav-link" data-toggle="tab" href="#detail">Thuộc tính sản phẩm</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#review">Đánh giá (15)</a>
+                                    <a class="nav-link" data-toggle="tab" href="#review">Đánh giá ({{ count($ratings) }})</a>
                                 </li>
                             </ul>
                         </div>
@@ -272,9 +320,9 @@ $productFilters = ProductsFilter::productFilters();
                                         @if($filterAvailable=="Yes")
                                             <tr>
                                                 <td>{{ $filter['filter_name'] }}</td>
-                                                <td> @foreach($filter['filter_values'] as $value)
-                    @if(!empty($productDetails[$filter['filter_column']]) && $value['filter_value']==$productDetails[$filter['filter_column']]) {{ucwords($value['filter_value'])}} @endif
-            @endforeach</td>
+                                                            <td> @foreach($filter['filter_values'] as $value)
+                                                                                    @if(!empty($productDetails[$filter['filter_column']]) && $value['filter_value']==$productDetails[$filter['filter_column']]) {{ucwords($value['filter_value'])}} @endif
+                                                                            @endforeach</td>
                                             </tr>
                                             @endif
                                             @endif
@@ -290,11 +338,11 @@ $productFilters = ProductsFilter::productFilters();
                                     <div class="row r-1 u-s-m-b-26 u-s-p-b-22">
                                         <div class="col-lg-6 col-md-6">
                                             <div class="total-score-wrapper">
-                                                <h6 class="review-h6">Average Rating</h6>
+                                                <h6 class="review-h6">Trung bình đánh giá</h6>
                                                 <div class="circle-wrapper">
-                                                    <h1>4.5</h1>
+                                                    <h1>{{$avgRating}}</h1>
                                                 </div>
-                                                <h6 class="review-h6">Based on 23 Reviews</h6>
+                                                <h6 class="review-h6">Trung bình trên {{count($ratings)}} lượt đánh giá</h6>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -302,74 +350,69 @@ $productFilters = ProductsFilter::productFilters();
                                                 <div class="star-wrapper">
                                                     <span>5 Stars</span>
                                                     <div class="star">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:75px;'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>({{$ratingFiveStarCount}})</span>
                                                 </div>
                                                 <div class="star-wrapper">
                                                     <span>4 Stars</span>
                                                     <div class="star">
-                                                        <span style='width:67px'></span>
+                                                   
+                                                        <span style='width:60px;'></span>
+                                                    
                                                     </div>
-                                                    <span>(23)</span>
+                                                    <span>({{$ratingFourStarCount}})</span>
                                                 </div>
                                                 <div class="star-wrapper">
                                                     <span>3 Stars</span>
                                                     <div class="star">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:45px;'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>({{$ratingThreeStarCount}})</span>
                                                 </div>
                                                 <div class="star-wrapper">
                                                     <span>2 Stars</span>
                                                     <div class="star">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:30px'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>({{$ratingTwoStarCount}})</span>
                                                 </div>
                                                 <div class="star-wrapper">
                                                     <span>1 Star</span>
                                                     <div class="star">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:15px;'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>({{$ratingOneStarCount}})</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row r-2 u-s-m-b-26 u-s-p-b-22">
                                         <div class="col-lg-12">
-                                            <div class="your-rating-wrapper">
-                                                <h6 class="review-h6">Your Review is matter.</h6>
-                                                <h6 class="review-h6">Have you used this product before?</h6>
-                                                <div class="star-wrapper u-s-m-b-8">
-                                                    <div class="star">
-                                                        <span id="your-stars" style='width:0'></span>
-                                                    </div>
-                                                    <label for="your-rating-value"></label>
-                                                    <input id="your-rating-value" type="text" class="text-field" placeholder="0.0">
-                                                    <span id="star-comment"></span>
+                                            <form method="post" action="{{ url('add-rating') }}" name="formRating" id="formRating">@csrf()
+                                                <input type="hidden" name="product_id" value="{{$productDetails['id']}}">
+                                                <div class="your-rating-wrapper">
+                                                    <h6 class="review-h6">Đánh giá của bạn rất quan trọng.</h6>
+                                                    <h6 class="review-h6">Bạn đã từng sử dụng sản phẩm này ?</h6>
+                                                    <div class="star-wrapper u-s-m-b-8">
+                                                        <div class="rate">
+                                                            <input style="display: none" type="radio" id="star5" name="rating" value="5" />
+                                                            <label for="star5" title="text">5 stars</label>
+                                                            <input style="display: none" type="radio" id="star4" name="rating" value="4" />
+                                                            <label for="star4" title="text">4 stars</label>
+                                                            <input style="display: none" type="radio" id="star3" name="rating" value="3" />
+                                                            <label for="star3" title="text">3 stars</label>
+                                                            <input style="display: none" type="radio" id="star2" name="rating" value="2" />
+                                                            <label for="star2" title="text">2 stars</label>
+                                                            <input style="display: none" type="radio" id="star1" name="rating" value="1" />
+                                                            <label for="star1" title="text">1 star</label>
+                                                        </div>
+                                                    </div> 
+                                                        <textarea name="review" class="text-area u-s-m-b-8" id="review-text-area" placeholder="Đánh giá của bạn về sản phẩm" required=""></textarea>
+                                                        <button type="submit" class="button button-outline-secondary">Đánh giá</button>
+                                                    
                                                 </div>
-                                                <form>
-                                                    <label for="your-name">Name
-                                                        <span class="astk"> *</span>
-                                                    </label>
-                                                    <input id="your-name" type="text" class="text-field" placeholder="Your Name">
-                                                    <label for="your-email">Email
-                                                        <span class="astk"> *</span>
-                                                    </label>
-                                                    <input id="your-email" type="text" class="text-field" placeholder="Your Email">
-                                                    <label for="review-title">Review Title
-                                                        <span class="astk"> *</span>
-                                                    </label>
-                                                    <input id="review-title" type="text" class="text-field" placeholder="Review Title">
-                                                    <label for="review-text-area">Review
-                                                        <span class="astk"> *</span>
-                                                    </label>
-                                                    <textarea class="text-area u-s-m-b-8" id="review-text-area" placeholder="Review"></textarea>
-                                                    <button class="button button-outline-secondary">Submit Review</button>
-                                                </form>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                     <!-- Get-Reviews -->
@@ -378,10 +421,10 @@ $productFilters = ProductsFilter::productFilters();
                                         <div class="review-options u-s-m-b-16">
                                             <div class="review-option-heading">
                                                 <h6>Reviews
-                                                    <span> (15) </span>
+                                                    <span> ({{count($ratings)}}) </span>
                                                 </h6>
                                             </div>
-                                            <div class="review-option-box">
+                                            <!-- <div class="review-option-box">
                                                 <div class="select-box-wrapper">
                                                     <label class="sr-only" for="review-sort">Review Sorter</label>
                                                     <select class="select-box" id="review-sort">
@@ -389,131 +432,38 @@ $productFilters = ProductsFilter::productFilters();
                                                         <option value="">Sort by: Worst Rating</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <!-- Review-Options /- -->
                                         <!-- All-Reviews -->
                                         <div class="reviewers">
-                                            <div class="review-data">
-                                                <div class="reviewer-name-and-date">
-                                                    <h6 class="reviewer-name">John</h6>
-                                                    <h6 class="review-posted-date">10 May 2018</h6>
-                                                </div>
-                                                <div class="reviewer-stars-title-body">
-                                                    <div class="reviewer-stars">
-                                                        <div class="star">
-                                                            <span style='width:67px'></span>
+                                            @if(count($ratings)>0)
+                                                @foreach($ratings as $rating)
+                                                    <div class="review-data">
+                                                        <div class="reviewer-name-and-date">
+                                                            <h6 class="reviewer-name">{{ $rating['user']['name'] }}</h6>
+                                                            <h6 class="review-posted-date">{{ date('d/m/Y H:i:s', strtotime($rating['created_at'])) }}</h6>
                                                         </div>
-                                                        <span class="review-title">Good!</span>
-                                                    </div>
-                                                    <p class="review-body">
-                                                        Good Quality...!
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="review-data">
-                                                <div class="reviewer-name-and-date">
-                                                    <h6 class="reviewer-name">Doe</h6>
-                                                    <h6 class="review-posted-date">10 June 2018</h6>
-                                                </div>
-                                                <div class="reviewer-stars-title-body">
-                                                    <div class="reviewer-stars">
-                                                        <div class="star">
-                                                            <span style='width:67px'></span>
+                                                        <div class="reviewer-stars-title-body">
+                                                            <div class="reviewer-stars">
+                                                                <?php
+                                                                $count=0;
+                                                                while($count<$rating['rating']){
+                                                                ?>
+                                                                <span style="color: gold;font-size: 24px; ">&#9733;</span>
+                                                                <?php $count++; } ?>
+                                                                
+                                                            </div>
+                                                            <p class="review-body">
+                                                            {{$rating['review']}}
+                                                            </p>
                                                         </div>
-                                                        <span class="review-title">Well done!</span>
                                                     </div>
-                                                    <p class="review-body">
-                                                        Cotton is good.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="review-data">
-                                                <div class="reviewer-name-and-date">
-                                                    <h6 class="reviewer-name">Tim</h6>
-                                                    <h6 class="review-posted-date">10 July 2018</h6>
-                                                </div>
-                                                <div class="reviewer-stars-title-body">
-                                                    <div class="reviewer-stars">
-                                                        <div class="star">
-                                                            <span style='width:67px'></span>
-                                                        </div>
-                                                        <span class="review-title">Well done!</span>
-                                                    </div>
-                                                    <p class="review-body">
-                                                        Excellent condition
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="review-data">
-                                                <div class="reviewer-name-and-date">
-                                                    <h6 class="reviewer-name">Johnny</h6>
-                                                    <h6 class="review-posted-date">10 March 2018</h6>
-                                                </div>
-                                                <div class="reviewer-stars-title-body">
-                                                    <div class="reviewer-stars">
-                                                        <div class="star">
-                                                            <span style='width:67px'></span>
-                                                        </div>
-                                                        <span class="review-title">Bright!</span>
-                                                    </div>
-                                                    <p class="review-body">
-                                                        Cotton
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="review-data">
-                                                <div class="reviewer-name-and-date">
-                                                    <h6 class="reviewer-name">Alexia C. Marshall</h6>
-                                                    <h6 class="review-posted-date">12 May 2018</h6>
-                                                </div>
-                                                <div class="reviewer-stars-title-body">
-                                                    <div class="reviewer-stars">
-                                                        <div class="star">
-                                                            <span style='width:67px'></span>
-                                                        </div>
-                                                        <span class="review-title">Well done!</span>
-                                                    </div>
-                                                    <p class="review-body">
-                                                        Good polyester Cotton
-                                                    </p>
-                                                </div>
-                                            </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                         <!-- All-Reviews /- -->
-                                        <!-- Pagination-Review -->
-                                        <div class="pagination-review-area">
-                                            <div class="pagination-review-number">
-                                                <ul>
-                                                    <li style="display: none">
-                                                        <a href="single-product.html" title="Previous">
-                                                            <i class="fas fa-angle-left"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="single-product.html">1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html">2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html">3</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html">...</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html">10</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product.html" title="Next">
-                                                            <i class="fas fa-angle-right"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- Pagination-Review /- -->
+                                        
                                     </div>
                                     <!-- Get-Reviews /- -->
                                 </div>
@@ -530,7 +480,7 @@ $productFilters = ProductsFilter::productFilters();
                 <section class="section-maker">
                     <div class="container">
                         <div class="sec-maker-header text-center">
-                            <h3 class="sec-maker-h3">Similar Products</h3>
+                            <h3 class="sec-maker-h3">Sản phẩm tương tự</h3>
                         </div>
                         <div class="slider-fouc">
                             <div class="products-slider owl-carousel" data-item="4">

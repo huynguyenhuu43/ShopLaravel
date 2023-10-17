@@ -16,6 +16,7 @@ use App\Models\Coupon;
 use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\OrdersProduct;
+use App\Models\Rating;
 use App\Models\User;
 use Session;
 use DB;
@@ -203,11 +204,30 @@ class ProductsController extends Controller
             $groupProducts = Product::select('id','product_image')->where('id','!=',$id)->where(['group_code'=>$productDetails['group_code'],'status'=>1])->get()->toArray();
             //dd($groupProducts);
         }
+        //ratings
+        $ratings = Rating::with('user')->where(['product_id'=>$id,'status'=>1])->get()->toArray();
+        //average rating
+        $ratingSum = Rating::where(['product_id'=>$id,'status'=>1])->sum('rating');
+        $ratingCount=Rating::where(['product_id'=>$id,'status'=>1])->count();
+        $avgRating=Rating::where(['product_id'=>$id,'status'=>1])->count();
+        $avgStarRating=Rating::where(['product_id'=>$id,'status'=>1])->count();
+
+        //getstar rating
+        $ratingOneStarCount=Rating::where(['product_id'=>$id,'status'=>1,'rating'=>1])->count();
+        $ratingTwoStarCount=Rating::where(['product_id'=>$id,'status'=>1,'rating'=>2])->count();
+        $ratingThreeStarCount=Rating::where(['product_id'=>$id,'status'=>1,'rating'=>3])->count();
+        $ratingFourStarCount=Rating::where(['product_id'=>$id,'status'=>1,'rating'=>4])->count();
+        $ratingFiveStarCount=Rating::where(['product_id'=>$id,'status'=>1,'rating'=>5])->count();
+
+        if($ratingCount>0){
+            $avgRating = round($ratingSum/$ratingCount,2);
+            $avgStarRating =round($ratingSum/$ratingCount);
+        }
 
 
        $totalStock =  ProductsAttribute::where('product_id',$id)->sum('stock'); 
        //dd($similarProducts);
-       return view('front.products.detail')->with(compact('productDetails','categoryDetails','totalStock','similarProducts','recentlyViewedProducts','groupProducts'));
+       return view('front.products.detail')->with(compact('productDetails','categoryDetails','totalStock','similarProducts','recentlyViewedProducts','groupProducts','ratings','avgRating','avgStarRating','ratingOneStarCount','ratingTwoStarCount','ratingThreeStarCount','ratingFourStarCount','ratingFiveStarCount'));
     }
 
     public function getProductPrice(Request $request){

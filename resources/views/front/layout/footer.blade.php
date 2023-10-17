@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <div class="footer-list">
-                            <h6>Contact</h6>
+                            <h6>Liên hệ</h6>
                             <ul>
                                 <li>
                                     <i class="fas fa-location-arrow u-s-m-r-9"></i>

@@ -6,45 +6,8 @@ $productFilters = ProductsFilter::productFilters();
 <div class="col-lg-3 col-md-3 col-sm-12">
                     <!-- Fetch-Categories-from-Root-Category  -->
                     <div class="fetch-categories">
-                        <h3 class="title-name">Browse Categories</h3>
-                        <!-- Level 1 -->
-                        <h3 class="fetch-mark-category">
-                            <a href="listing.html">T-Shirts
-                                <span class="total-fetch-items">(5)</span>
-                            </a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <a href="shop-v3-sub-sub-category.html">Casual T-Shirts
-                                    <span class="total-fetch-items">(3)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="listing.html">Formal T-Shirts
-                                    <span class="total-fetch-items">(2)</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- //end Level 1 -->
-                        <!-- Level 2 -->
-                        <h3 class="fetch-mark-category">
-                            <a href="listing.html">Shirts
-                                <span class="total-fetch-items">(5)</span>
-                            </a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <a href="shop-v3-sub-sub-category.html">Casual Shirts
-                                    <span class="total-fetch-items">(3)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="listing.html">Formal Shirts
-                                    <span class="total-fetch-items">(2)</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- //end Level 2 -->
+                        <h3 class="title-name">Bộ lọc</h3>
+                       
                     </div>
                     <!-- Fetch-Categories-from-Root-Category  /- -->
                     @if(!isset($_REQUEST['search']))
@@ -52,7 +15,7 @@ $productFilters = ProductsFilter::productFilters();
                         <!-- Filter-Size -->
                         <?php $getSizes = ProductsFilter::getSizes($url); ?>
                         <div class="facet-filter-associates">
-                            <h3 class="title-name">Size</h3>
+                            <h3 class="title-name">Kích thước</h3>
                             <form class="facet-form" action="#" method="post">
                                 <div class="associate-wrapper">
                                     @foreach($getSizes as $key => $size)
@@ -68,7 +31,7 @@ $productFilters = ProductsFilter::productFilters();
                         <!-- Filter-Color -->
                         <?php $getColors = ProductsFilter::getColors($url); ?>
                         <div class="facet-filter-associates">
-                            <h3 class="title-name">Color</h3>
+                            <h3 class="title-name">Màu sắc</h3>
                             <form class="facet-form" action="#" method="post">
                                 <div class="associate-wrapper">
                                 @foreach($getColors as $key => $color)
@@ -85,7 +48,7 @@ $productFilters = ProductsFilter::productFilters();
                         <!-- Filter-Brand -->
                         <?php $getBrands = ProductsFilter::getBrands($url); ?>
                         <div class="facet-filter-associates">
-                            <h3 class="title-name">Brand</h3>
+                            <h3 class="title-name">Thương hiệu</h3>
                             <form class="facet-form" action="#" method="post">
                                 <div class="associate-wrapper">
                                 @foreach($getBrands as $key => $brand)
@@ -102,7 +65,7 @@ $productFilters = ProductsFilter::productFilters();
 
                         <!-- Filter-price -->
                         <div class="facet-filter-associates">
-                            <h3 class="title-name">Price</h3>
+                            <h3 class="title-name">Giá thành</h3>
                             <form class="facet-form" action="#" method="post">
                                 <div class="associate-wrapper">
                                     <?php $prices =array('0-1000000','1100000-3000000','3000000-5000000','5000000-10000000','10100000-30000000'); ?>

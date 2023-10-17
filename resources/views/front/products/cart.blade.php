@@ -9,10 +9,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="index.html">Home</a>
+                        <a href="{{url('/')}}">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="cart.html">Cart</a>
+                        <a href="{{url('/cart')}}">Giỏ hàng</a>
                     </li>
                 </ul>
             </div>
@@ -47,18 +47,18 @@
                      <!-- Coupon -->
                      <div class="coupon-continue-checkout u-s-m-b-60">
                             <div class="coupon-area">
-                                <h6>Enter your coupon code if you have one.</h6>
+                                <h6>Nhập mã giảm giá nếu bạn có.</h6>
                                 <div class="coupon-field">
                                     <form id="ApplyCoupon" method="post" action="javascript:void(0);" @if(Auth::check()) user="1" @endif>@csrf
-                                        <label class="sr-only" for="coupon-code">Apply Coupon</label>
+                                        <label class="sr-only" for="coupon-code">Áp dụng mã giảm giá</label>
                                         <input id="code" name="code" type="text" class="text-field" placeholder="Coupon Code">
-                                        <button type="submit" class="button">Apply Coupon</button>
+                                        <button type="submit" class="button">Áp dụng mã giảm giá</button>
                                     </form>
                                 </div>
                             </div>
                             <div class="button-area">
-                                <a href="{{url('/')}}" class="continue">Continue Shopping</a>
-                                <a href="{{url('/checkout')}}" class="checkout">Proceed to Checkout</a>
+                                <a href="{{url('/')}}" class="continue">Tiếp tục mua sắm</a>
+                                <a href="{{url('/checkout')}}" class="checkout">Tiến hành thanh toán</a>
                             </div>
                         </div>
                         <!-- Coupon /- -->

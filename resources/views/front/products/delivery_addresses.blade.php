@@ -4,9 +4,9 @@
                                 <div class="u-s-m-b-24">
                                     <input type="checkbox" class="check-box" id="ship-to-different-address" data-toggle="collapse" data-target="#showdifferent">
                                     @if(count($deliveryAddresses)>0)
-                                    <label class="label-text newAddress" for="ship-to-different-address">Ship to a different address?</label>
+                                    <label class="label-text newAddress" for="ship-to-different-address">Giao đến địa chỉ khác?</label>
                                     @else
-                                    <label class="label-text newAddress" for="ship-to-different-address">Check to add Delivery Address</label>
+                                    <label class="label-text newAddress" for="ship-to-different-address">Thêm địa chỉ nhận hàng</label>
                                     @endif
                                 </div>
                                 <div class="collapse" id="showdifferent">
@@ -69,7 +69,7 @@
                                     
                                 </div>
                                 <div>
-                                    <label for="order-notes">Order Notes</label>
+                                    <label for="order-notes">Ghi chú</label>
                                     <textarea class="text-area" id="order-notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                 </div>
                           

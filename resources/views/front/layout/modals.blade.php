@@ -223,7 +223,7 @@
                                             </ul>
                                         </div>
                                         <div class="quantity-wrapper u-s-m-b-22">
-                                            <span>Quantity:</span>
+                                            <span>Số lượng:</span>
                                             <div class="quantity">
                                                 <input type="text" class="quantity-text-field" value="1">
                                                 <a class="plus-a" data-max="1000">&#43;</a>

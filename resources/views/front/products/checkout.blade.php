@@ -10,10 +10,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="{{url('/')}}">Home</a>
+                        <a href="{{url('/')}}">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="checkout.html">Checkout</a>
+                        <a href="{{url('/checkout')}}">Thanh toán</a>
                     </li>
                 </ul>
             </div>
@@ -58,13 +58,13 @@
                             </div>
                                 @endforeach<br>
                              @endif
-                                    <h4 class="section-h4">Your Order</h4>
+                                    <h4 class="section-h4">Đơn hàng của bạn</h4>
                                     <div class="order-table">
                                         <table class="u-s-m-b-13">
                                             <thead>
                                                 <tr>
-                                                    <th>Product</th>
-                                                    <th>Total</th>
+                                                    <th>Sản phẩm</th>
+                                                    <th>Tổng</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -89,7 +89,7 @@
                                             @endforeach
                                                 <tr>
                                                     <td>
-                                                        <h3 class="order-h3">Subtotal</h3>
+                                                        <h3 class="order-h3">Tổng đơn hàng</h3>
                                                     </td>
                                                     <td>
                                                         <h3 class="order-h3">{{ number_format($total_price, 0, ',', '.') }} ₫</h3>
@@ -97,7 +97,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <h6 class="order-h6">Shipping</h6>
+                                                        <h6 class="order-h6">Phí vận chuyển</h6>
                                                     </td>
                                                     <td>
                                                         <h6 class="order-h6"> 0 ₫
@@ -118,7 +118,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <h3 class="order-h3">Total</h3>
+                                                        <h3 class="order-h3">Tổng</h3>
                                                     </td>
                                                     <td>
                                                         <h3 class="order-h3">{{ number_format($total_price - Session::get('couponAmount'), 0, ',', '.') }} ₫</h3>
@@ -128,7 +128,7 @@
                                         </table>
                                         <div class="u-s-m-b-13">
                                             <input type="radio" class="radio-box" name="payment_gateway"  id="cash-on-delivery" value="COD">
-                                            <label class="label-text" for="cash-on-delivery">Cash on Delivery</label>
+                                            <label class="label-text" for="cash-on-delivery">Thanh toán khi nhận hàng</label>
                                         </div>
                                        
                                         <div class="u-s-m-b-13">
@@ -137,11 +137,11 @@
                                         </div>
                                         <div class="u-s-m-b-13">
                                             <input type="checkbox" class="check-box" id="accept" name="accept" value="Yes" title="Vui lòng chấp nhận các điều khoản">
-                                            <label class="label-text no-color" for="accept">I’ve read and accept the
-                                                <a href="terms-and-conditions.html" class="u-c-brand">terms & conditions</a>
+                                            <label class="label-text no-color" for="accept">Tôi đã đọc
+                                                <a href="terms-and-conditions.html" class="u-c-brand">điều khoản và điều kiện</a>
                                             </label>
                                         </div>
-                                        <button type="submit" class="button button-outline-secondary">Place Order</button>
+                                        <button type="submit" class="button button-outline-secondary">Đặt hàng</button>
                                     </div>
                                 </form>
                                 </div>

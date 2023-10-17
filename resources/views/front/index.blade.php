@@ -32,19 +32,19 @@
     <section class="section-maker">
         <div class="container">
             <div class="sec-maker-header text-center">
-                <h3 class="sec-maker-h3">TOP COLLECTION</h3>
+                <h3 class="sec-maker-h3">DANH SÁCH TUYỂN CHỌN</h3>
                 <ul class="nav tab-nav-style-1-a justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#men-latest-products">New Arrivals</a>
+                        <a class="nav-link active" data-toggle="tab" href="#men-latest-products">Sản phẩm mới</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#men-best-selling-products">Best Sellers</a>
+                        <a class="nav-link" data-toggle="tab" href="#men-best-selling-products">Bán chạy nhất</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#discounted-products">Discounted Products</a>
+                        <a class="nav-link" data-toggle="tab" href="#discounted-products">Sản phẩm giảm giá</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#men-featured-products">Featured Products</a>
+                        <a class="nav-link" data-toggle="tab" href="#men-featured-products">Sản phẩm nổi bật</a>
                     </li>
                 </ul>
             </div>
@@ -85,9 +85,9 @@
                                                 </h6>
                                                 <div class="item-stars">
                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:67px;'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>(14)</span>
                                                 </div>
                                             </div>
                                             <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
@@ -153,9 +153,9 @@
                                                 </h6>
                                                 <div class="item-stars">
                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:50px;'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>(22)</span>
                                                 </div>
                                             </div>
                                             <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
@@ -221,9 +221,9 @@
                                                 </h6>
                                                 <div class="item-stars">
                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:70px;'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>(10)</span>
                                                 </div>
                                             </div>
                                             <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>
@@ -288,9 +288,9 @@
                                                 </h6>
                                                 <div class="item-stars">
                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                        <span style='width:0'></span>
+                                                        <span style='width:26px'></span>
                                                     </div>
-                                                    <span>(0)</span>
+                                                    <span>(12)</span>
                                                 </div>
                                             </div>
                                             <?php $getDiscountPrice = Product::getDiscountPrice($product['id']); ?>

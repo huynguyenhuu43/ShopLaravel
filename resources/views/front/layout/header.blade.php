@@ -11,12 +11,12 @@ $totalCartItems =totalCartItems();
                 <nav>
                     <ul class="primary-nav g-nav">
                         <li>
-                            <a href="tel:+111222333">
+                            <a href="tel:+84398730223">
                                 <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
                                 Telephone: +84 398730223</a>
                         </li>
                         <li>
-                            <a href="mailto:info@sitemakers.in">
+                            <a href="mailto:2051010108huy@ou.edu.vn">
                                 <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
                                 E-mail: 2051010108huy@ou.edu.vn
                             </a>
@@ -189,7 +189,7 @@ $totalCartItems =totalCartItems();
                         <div class="v-menu v-close">
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
-                                All Categories
+                                tất cả sản phẩm
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>
@@ -244,63 +244,63 @@ $totalCartItems =totalCartItems();
                     <div class="col-lg-9">
                         <ul class="bottom-nav g-nav u-d-none-lg">
                             <li>
-                                <a href="listing-without-filters.html">New Arrivals
+                                <a href="{{url('/Apple')}}">Điện thoại
                                     <span class="superscript-label-new">NEW</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Best Seller
+                                <a href="{{url('/Lenovo')}}">Laptop
                                     <span class="superscript-label-hot">HOT</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Featured
+                                <a href="{{url('/Coolpad')}}">Máy tính bảng
                                 </a>
                             </li>
                             <li>
-                                <a href="listing-without-filters.html">Discounted
+                                <a href="{{url('/Havit')}}">Tai nghe
                                     <span class="superscript-label-discount">-30%</span>
                                 </a>
                             </li>
                             <li class="mega-position">
-                                <a>More
+                                <a>Thêm
                                     <i class="fas fa-chevron-down u-s-m-l-9"></i>
                                 </a>
                                 <div class="mega-menu mega-3-colm">
                                     <ul>
-                                        <li class="menu-title">COMPANY</li>
+                                        <li class="menu-title">LIÊN HỆ</li>
                                         <li>
-                                            <a href="#" class="u-c-brand">About Us</a>
+                                            <a href="#" class="u-c-brand">Về chúng tôi</a>
                                         </li>
                                         <li>
-                                            <a href="contact.html">Contact Us</a>
+                                            <a href="https://www.facebook.com/dongniengshop">Fanpage</a>
                                         </li>
                                         <li>
-                                            <a href="faq.html">FAQ</a>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li class="menu-title">COLLECTION</li>
-                                        <li>
-                                            <a href="{{url('men')}}">Men Clothing</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('women')}}">Women Clothing</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('Mobiles')}}">Kids Clothing</a>
+                                            <a href="https://vi.wikipedia.org/wiki/FAQ">FAQ</a>
                                         </li>
                                     </ul>
                                     <ul>
-                                        <li class="menu-title">ACCOUNT</li>
+                                        <li class="menu-title">THƯƠNG HIỆU</li>
                                         <li>
-                                            <a href="{{ url('/user/account') }}">My Account</a>
+                                            <a href="{{url('Apple')}}">Apple</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('Samsung')}}">Samsung</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('Oppo')}}">Oppo</a>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="menu-title">TÀI KHOẢN</li>
+                                        <li>
+                                            <a href="{{ url('/user/account') }}">Tài khoản của tôi</a>
                                         </li>
                                         <!-- <li>
                                             <a href="shop-v1-root-category.html">My Profile</a>
                                         </li> -->
                                         <li>
-                                            <a href="{{ url('/user/orders') }}">My Orders</a>
+                                            <a href="{{ url('/user/orders') }}">Đơn hàng của tôi</a>
                                         </li>
                                         
                                     </ul>
