@@ -94,3 +94,28 @@ class Product extends Model
     
     
 }
+
+
+// Đại diện cho bảng trong cơ sở dữ liệu:
+
+// Model Product đại diện cho bảng products trong cơ sở dữ liệu của bạn. Mỗi đối tượng của lớp Product tương ứng với một bản ghi trong bảng products.
+// Định nghĩa mối quan hệ giữa các bảng:
+
+// Các phương thức như section(), category(), brand(), attributes(), images(), vendor() định nghĩa các mối quan hệ giữa bảng products và các bảng khác như sections, categories, brands, products_attributes, products_images, và vendors.
+// Những mối quan hệ này giúp bạn dễ dàng truy vấn dữ liệu liên quan một cách thuận tiện và hiệu quả.
+// Thực hiện các logic nghiệp vụ:
+
+// Các phương thức như getDiscountPrice(), getDiscountAttributePrice(), isProductNew(), getProductImage(), getProductStatus(), deleteCartProduct() chứa logic nghiệp vụ cụ thể liên quan đến sản phẩm.
+// Ví dụ, getDiscountPrice() tính toán giá sản phẩm sau khi áp dụng các mức giảm giá, isProductNew() kiểm tra xem sản phẩm có phải là sản phẩm mới hay không.
+// Tương tác với cơ sở dữ liệu:
+
+// Model Product sử dụng Eloquent ORM của Laravel để tương tác với cơ sở dữ liệu. Eloquent cung cấp các phương thức như select(), where(), first(), pluck(), delete() để truy vấn và thao tác dữ liệu một cách dễ dàng và trực quan.
+// Sử dụng Eloquent, bạn có thể thực hiện các truy vấn phức tạp một cách đơn giản mà không cần viết các câu lệnh SQL dài dòng.
+// Sử dụng các tiện ích của Laravel:
+
+// Model Product sử dụng trait HasFactory để hỗ trợ tạo dữ liệu giả lập trong quá trình phát triển và kiểm thử.
+// Trait HasFactory giúp tạo ra các bản ghi mẫu trong cơ sở dữ liệu một cách nhanh chóng.
+// Định nghĩa các phương thức tùy chỉnh:
+
+// Model Product có thể chứa các phương thức tùy chỉnh như getDiscountPrice(), getProductImage(), deleteCartProduct(), giúp tổ chức và tái sử dụng logic nghiệp vụ một cách hiệu quả.
+// Tóm lại, file model trong Laravel có vai trò trung gian giữa cơ sở dữ liệu và ứng dụng, giúp quản lý và thao tác dữ liệu một cách hiệu quả, đồng thời cung cấp các tiện ích mạnh mẽ của Eloquent ORM để xây dựng các ứng dụng web phức tạp.

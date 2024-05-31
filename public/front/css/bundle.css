@@ -1437,11 +1437,11 @@ body {
   color: #d90429; }
   .tab-nav-style-1-a > .nav-item:hover > .nav-link:after {
     transform: scale(1); }
-
+/* màu chữ body */
 .tab-nav-style-1-a > .nav-item > .nav-link {
   border-bottom: 3px solid transparent;
-  font-size: 13px;
-  color: #727272; }
+  font-size: 16px;
+  color: #2b2424; }
   .tab-nav-style-1-a > .nav-item > .nav-link:after {
     content: "";
     background-color: #d90429;

@@ -12,6 +12,9 @@ return new class extends Migration
      * product_weight, product_video, 
      * meta_title, meta_description, meta_keywords, is_featured and status
      * Run the migrations.
+     * 
+     * up set thuộc tính bảng
+     
      */
     public function up(): void
     {

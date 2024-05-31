@@ -112,6 +112,7 @@ $totalCartItems =totalCartItems();
                     <div class="col-lg-3 col-md-9 col-sm-6">
                         <div class="brand-logo text-lg-center">
                             <a href="{{url('/')}}">
+                                <!-- chỗ đổi logo nha -->
                                 <img src="{{ asset('front/images/main-logo/logofpt.png') }}" alt="Stack Developers" class="app-brand-logo">
                             </a>
                         </div>

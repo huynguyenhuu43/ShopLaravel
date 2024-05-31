@@ -399,3 +399,53 @@ class ProductsController extends Controller
     }
     
 }
+
+// products()
+
+// Mục đích: Lấy danh sách các sản phẩm và hiển thị chúng trên trang quản trị sản phẩm.
+// Chi tiết: Đặt trang hiện tại là 'products', kiểm tra loại tài khoản admin, lấy danh sách sản phẩm cùng với thông tin section và category liên quan, và trả về view admin.products.products.
+// updateProductStatus(Request $request)
+
+// Mục đích: Cập nhật trạng thái của sản phẩm (Active hoặc Inactive).
+// Chi tiết: Nhận yêu cầu AJAX, lấy dữ liệu trạng thái, cập nhật trạng thái sản phẩm trong cơ sở dữ liệu, và trả về phản hồi JSON.
+// deleteProduct($id)
+
+// Mục đích: Xóa sản phẩm khỏi cơ sở dữ liệu.
+// Chi tiết: Xóa sản phẩm dựa trên ID và trả về thông báo thành công.
+// addEditProduct(Request $request, $id = null)
+
+// Mục đích: Thêm mới hoặc chỉnh sửa thông tin sản phẩm.
+// Chi tiết: Hiển thị form thêm hoặc chỉnh sửa sản phẩm, xử lý dữ liệu từ form, tải lên và xử lý hình ảnh và video sản phẩm, và lưu sản phẩm vào cơ sở dữ liệu.
+// deleteProductImage($id)
+
+// Mục đích: Xóa hình ảnh sản phẩm khỏi hệ thống.
+// Chi tiết: Lấy hình ảnh sản phẩm, xóa hình ảnh từ các thư mục và cập nhật cơ sở dữ liệu.
+// deleteProductVideo($id)
+
+// Mục đích: Xóa video sản phẩm khỏi hệ thống.
+// Chi tiết: Lấy video sản phẩm, xóa video từ thư mục và cập nhật cơ sở dữ liệu.
+// addAttributes(Request $request, $id)
+
+// Mục đích: Thêm thuộc tính cho sản phẩm.
+// Chi tiết: Hiển thị form thêm thuộc tính, xử lý dữ liệu từ form, và lưu các thuộc tính vào cơ sở dữ liệu.
+// updateAttributeStatus(Request $request)
+
+// Mục đích: Cập nhật trạng thái của thuộc tính sản phẩm (Active hoặc Inactive).
+// Chi tiết: Nhận yêu cầu AJAX, cập nhật trạng thái của thuộc tính sản phẩm và trả về phản hồi JSON.
+// editAttributes(Request $request)
+
+// Mục đích: Chỉnh sửa các thuộc tính của sản phẩm.
+// Chi tiết: Nhận dữ liệu từ form, cập nhật các thuộc tính trong cơ sở dữ liệu, và trả về thông báo thành công.
+// addImages(Request $request, $id)
+
+// Mục đích: Thêm hình ảnh cho sản phẩm.
+// Chi tiết: Hiển thị form thêm hình ảnh, xử lý dữ liệu từ form, tải lên và xử lý hình ảnh, và lưu các hình ảnh vào cơ sở dữ liệu.
+// updateImageStatus(Request $request)
+
+// Mục đích: Cập nhật trạng thái của hình ảnh sản phẩm (Active hoặc Inactive).
+// Chi tiết: Nhận yêu cầu AJAX, cập nhật trạng thái của hình ảnh sản phẩm và trả về phản hồi JSON.
+// deleteImage($id)
+
+// Mục đích: Xóa hình ảnh sản phẩm khỏi hệ thống.
+// Chi tiết: Lấy hình ảnh sản phẩm, xóa hình ảnh từ các thư mục và cơ sở dữ liệu, và trả về thông báo thành công.
+// Tóm lại, controller này cung cấp các phương thức để quản lý các sản phẩm, bao gồm thêm mới, chỉnh sửa, xóa, và cập nhật trạng thái của sản phẩm cũng như các thuộc tính và hình ảnh liên quan.
