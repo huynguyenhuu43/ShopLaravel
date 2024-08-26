@@ -30,7 +30,7 @@
             <div class="collapse" id="ui-catalogue">
                 <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">                 
                     <li class="nav-item"> <a @if(Session::get('page')=="products") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/products') }}">Sản phẩm</a></li>
-                    <!-- <li class="nav-item"> <a @if(Session::get('page')=="coupons") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/coupons') }}">Coupon</a></li> -->
+                    <li class="nav-item"> <a @if(Session::get('page')=="coupons") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/coupons') }}">Coupon</a></li>
                 </ul>
             </div>
         </li>
@@ -70,9 +70,9 @@
             <div class="collapse" id="ui-admins">
                 <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
                     <li class="nav-item"> <a @if(Session::get('page')=="view_admins") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/admins/admin') }}">Quản trị viên</a></li>
-                    <!-- <li class="nav-item"> <a @if(Session::get('page')=="view_subadmins") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/admins/subadmin') }}">Quản trị viên phụ</a></li>
+                    <li class="nav-item"> <a @if(Session::get('page')=="view_subadmins") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/admins/subadmin') }}">Quản trị viên phụ</a></li>
                     <li class="nav-item"> <a @if(Session::get('page')=="view_vendors") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/admins/vendor') }}">Nhà cung cấp</a></li>
-                    <li class="nav-item"> <a @if(Session::get('page')=="view_all") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/admins') }}">Tất cả</a></li> -->
+                    <li class="nav-item"> <a @if(Session::get('page')=="view_all") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/admins') }}">Tất cả</a></li>
                 </ul>
             </div>
         </li>

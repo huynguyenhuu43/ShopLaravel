@@ -13,12 +13,12 @@ $totalCartItems =totalCartItems();
                         <li>
                             <a href="tel:+84398730223">
                                 <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
-                                Telephone: +84 398730223</a>
+                                Telephone: +84 398730333</a>
                         </li>
                         <li>
                             <a href="mailto:2051010108huy@ou.edu.vn">
                                 <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
-                                E-mail: 2051010108huy@ou.edu.vn
+                                E-mail: sangning@gmail.com
                             </a>
                         </li>
                     </ul>
