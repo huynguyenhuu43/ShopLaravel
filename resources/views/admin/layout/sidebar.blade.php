@@ -93,13 +93,13 @@
                 </ul>
             </div>
         </li>
-        <<li class="nav-item">
+        <li class="nav-item">
             <a @if(Session::get('page')=="users") || Session::get('page')=="subscribers") style="background:#4B49AC !important; color:#fff !important; " @endif class="nav-link" data-toggle="collapse" href="#ui-users" aria-expanded="false" aria-controls="ui-users">
             <i class="icon-layout menu-icon"></i>
             <span class="menu-title">Quản lý người dùng</span>
             <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id"ui-users" >
+            <div class="collapse" id="ui-users" >
                 <ul class="nav flex-column sub-menu" style="background: #fff !important; color:#4B49AC !important;">
                     <li class="nav-item"> <a @if(Session::get('page')=="users") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/users') }}">Users</a></li>
                     <li class="nav-item"> <a @if(Session::get('page')=="subscribers") style="background: #4B49AC !important; color:#fff !important; " @else style="background: #fff !important; color:#4B49AC !important; "  @endif class="nav-link" href="{{ url('admin/subcbrice') }}">Người đăng kí</a></li>
